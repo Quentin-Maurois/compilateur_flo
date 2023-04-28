@@ -45,3 +45,10 @@ class Entier:
 		self.valeur = valeur
 	def afficher(self,indent=0):
 		afficher("[Entier:"+str(self.valeur)+"]",indent)
+
+
+class Booleen:
+        def __init__(self,valeur):
+                self.valeur = valeur
+        def afficher (self, indent=0):
+                afficher("[Booleen : "+str(self.valeur)+"]",indent)

@@ -3,9 +3,7 @@ from sly import Lexer
 
 class FloLexer(Lexer):
 	# Noms des lexèmes (sauf les litéraux). En majuscule. Ordre non important
-	tokens = { IDENTIFIANT, ENTIER, ECRIRE, INFERIEUR_OU_EGAL, SI, SINON, BOOLEAN, TANTQUE}
-
-	# SINON, SI, BOOLEAN, TANTQUE
+	tokens = { IDENTIFIANT, ENTIER, BOOLEEN, ECRIRE, LIRE, EGAL, DIFFERENT, INFERIEUR, SUPPERIEUR, SUPPERIEUR_OU_EGAL, INFERIEUR_OU_EGAL, SI, SINON, TANTQUE, ET, NON, OU}
 
 	#Les caractères litéraux sont des caractères uniques qui sont retournés tel quel quand rencontré par l'analyse lexicale. 
 	#Les litéraux sont vérifiés en dernier, après toutes les autres règles définies par des expressions régulières.
@@ -28,6 +26,7 @@ class FloLexer(Lexer):
 
 	# cas spéciaux:
 	IDENTIFIANT['ecrire'] = ECRIRE
+	IDENTIFIANT['lire'] = LIRE
 	
 	#Syntaxe des commentaires à ignorer
 	ignore_comment = r'\#.*'
