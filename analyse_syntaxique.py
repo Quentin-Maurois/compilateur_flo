@@ -116,6 +116,36 @@ class FloParser(Parser):
 	@_('FAUX')
 	def expr(self, p):
 		return arbre_abstrait.Faux()
+	
+	@_('SI "(" expr ")" "{" listeInstructions "}"',
+       'SI "(" expr ")" "{" listeInstructions "}" listeSinonSi',
+       'SI "(" expr ")" "{" listeInstructions "}" SINON "{" listeInstructions "}"',
+       'SI "(" expr ")" "{" listeInstructions "}" listeSinonSi SINON "{" listeInstructions "}"'
+       )
+	def conditionnelle(self, p):
+		print("conditionnelle", p)
+		conditions = [p[2]]
+		instructions = [p[5]]
+		for i in range(6,len(p),2):
+			conditions.append(p[i])
+			instructions.append(p[i+3])
+		if len(p) == 11 or len(p) == 12:
+			instructions.append(p[len(p)-2])
+		return arbre_abstrait.Conditionnelle(conditions,instructions)
+	
+	@_('SINON_SI "(" expr ")" "{" listeInstructions "}"',
+	   'SINON_SI "(" expr ")" "{" listeInstructions "}" listeSinonSi'
+	   )
+	def listeSinonSi(self, p):
+		if len(p) == 8:
+			return self.conditionnelle(p[2],p[5])
+		elif len(p) == 9:
+			return self.conditionnelle(p[2],[p[5], p[7]])
+		
+	"""@_('TANTQUE "(" expr ")" { listeInstructions }')
+	def instruction(self, p):
+		return arbre_abstrait.TantQue(p.expr,p.listeInstructions)"""
+
 
 if __name__ == '__main__':
 	lexer = FloLexer()
