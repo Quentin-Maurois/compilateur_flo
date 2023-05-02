@@ -15,14 +15,6 @@ class FloLexer(Lexer):
 
 	# Expressions régulières correspondant au différents Lexèmes par ordre de priorité
 
-	#opérateurs
-	INFERIEUR_OU_EGAL= r'<='
-	SUPERIEUR_OU_EGAL = r'>='
-	EGAL = r'=='
-	DIFFERENT = r'!='
-	INFERIEUR = r'<'
-	SUPERIEUR = r'>'
-
 	
 	@_(r'0|[1-9][0-9]*')
 	def ENTIER(self, t):
@@ -49,6 +41,16 @@ class FloLexer(Lexer):
 	IDENTIFIANT['entier'] = TYPE_ENTIER
 	IDENTIFIANT['booleen'] = TYPE_BOOLEEN
 
+
+	
+	#opérateurs
+	INFERIEUR_OU_EGAL= r'<='
+	SUPERIEUR_OU_EGAL = r'>='
+	EGAL = r'=='
+	DIFFERENT = r'!='
+	INFERIEUR = r'<'
+	SUPERIEUR = r'>'
+
 	# comparaison
 	IDENTIFIANT['=='] = EGAL
 	IDENTIFIANT['!='] = DIFFERENT
@@ -56,13 +58,7 @@ class FloLexer(Lexer):
 	IDENTIFIANT[">"] = SUPERIEUR
 	IDENTIFIANT[">="] = SUPERIEUR_OU_EGAL
 	IDENTIFIANT["<="] = INFERIEUR_OU_EGAL
-	
-	"""IDENTIFIANT['egal'] = EGAL
-	IDENTIFIANT['different'] = DIFFERENT
-	IDENTIFIANT['inferieur'] = INFERIEUR
-	IDENTIFIANT['superieur'] = SUPERIEUR
-	IDENTIFIANT['superieur_ou_egal'] = SUPERIEUR_OU_EGAL
-	IDENTIFIANT['inferieur_ou_egal'] = INFERIEUR_OU_EGAL"""
+
 	
 	#Syntaxe des commentaires à ignorer
 	ignore_comment = r'\#.*'
