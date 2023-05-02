@@ -7,30 +7,35 @@ Rule 3     listeInstructions -> instruction
 Rule 4     instruction -> ecrire
 Rule 5     ecrire -> ECRIRE ( expr ) ;
 Rule 6     expr -> ENTIER
-Rule 7     expr -> ( expr )
-Rule 8     expr -> expr % expr
-Rule 9     expr -> expr / expr
-Rule 10    expr -> expr * expr
-Rule 11    expr -> expr - expr
-Rule 12    expr -> expr + expr
+Rule 7     expr -> ( expr )  [precedence=left, level=6]
+Rule 8     expr -> expr % expr  [precedence=left, level=5]
+Rule 9     expr -> expr / expr  [precedence=left, level=5]
+Rule 10    expr -> expr * expr  [precedence=left, level=5]
+Rule 11    expr -> expr - expr  [precedence=left, level=4]
+Rule 12    expr -> expr + expr  [precedence=left, level=4]
 
 Unused terminals:
 
-    SI
-    INFERIEUR_OU_EGAL
-    DIFFERENT
-    SUPPERIEUR_OU_EGAL
-    IDENTIFIANT
-    EGAL
-    BOOLEEN
-    SUPPERIEUR
-    LIRE
-    SINON
+    TYPE_ENTIER
     ET
-    NON
-    INFERIEUR
-    TANTQUE
     OU
+    DIFFERENT
+    LIRE
+    IDENTIFIANT
+    RETOURNER
+    SI
+    SUPERIEUR
+    NON
+    EGAL
+    VRAI
+    TYPE_BOOLEEN
+    TANTQUE
+    SINON
+    INFERIEUR
+    BOOLEEN
+    FAUX
+    SUPERIEUR_OU_EGAL
+    INFERIEUR_OU_EGAL
 
 Terminals, with rules where they appear:
 
@@ -48,17 +53,22 @@ ECRIRE               : 5
 EGAL                 : 
 ENTIER               : 6
 ET                   : 
+FAUX                 : 
 IDENTIFIANT          : 
 INFERIEUR            : 
 INFERIEUR_OU_EGAL    : 
 LIRE                 : 
 NON                  : 
 OU                   : 
+RETOURNER            : 
 SI                   : 
 SINON                : 
-SUPPERIEUR           : 
-SUPPERIEUR_OU_EGAL   : 
+SUPERIEUR            : 
+SUPERIEUR_OU_EGAL    : 
 TANTQUE              : 
+TYPE_BOOLEEN         : 
+TYPE_ENTIER          : 
+VRAI                 : 
 error                : 
 
 Nonterminals, with rules where they appear:
@@ -310,17 +320,12 @@ state 20
     (10) expr -> expr . * expr
     (11) expr -> expr . - expr
     (12) expr -> expr . + expr
-  ! shift/reduce conflict for % resolved as shift
-  ! shift/reduce conflict for / resolved as shift
-  ! shift/reduce conflict for * resolved as shift
-  ! shift/reduce conflict for - resolved as shift
-  ! shift/reduce conflict for + resolved as shift
     )               reduce using rule 8 (expr -> expr % expr .)
-    %               shift and go to state 13
-    /               shift and go to state 14
-    *               shift and go to state 15
-    -               shift and go to state 16
-    +               shift and go to state 17
+    %               reduce using rule 8 (expr -> expr % expr .)
+    /               reduce using rule 8 (expr -> expr % expr .)
+    *               reduce using rule 8 (expr -> expr % expr .)
+    -               reduce using rule 8 (expr -> expr % expr .)
+    +               reduce using rule 8 (expr -> expr % expr .)
 
 
 state 21
@@ -331,17 +336,12 @@ state 21
     (10) expr -> expr . * expr
     (11) expr -> expr . - expr
     (12) expr -> expr . + expr
-  ! shift/reduce conflict for % resolved as shift
-  ! shift/reduce conflict for / resolved as shift
-  ! shift/reduce conflict for * resolved as shift
-  ! shift/reduce conflict for - resolved as shift
-  ! shift/reduce conflict for + resolved as shift
     )               reduce using rule 9 (expr -> expr / expr .)
-    %               shift and go to state 13
-    /               shift and go to state 14
-    *               shift and go to state 15
-    -               shift and go to state 16
-    +               shift and go to state 17
+    %               reduce using rule 9 (expr -> expr / expr .)
+    /               reduce using rule 9 (expr -> expr / expr .)
+    *               reduce using rule 9 (expr -> expr / expr .)
+    -               reduce using rule 9 (expr -> expr / expr .)
+    +               reduce using rule 9 (expr -> expr / expr .)
 
 
 state 22
@@ -352,17 +352,12 @@ state 22
     (10) expr -> expr . * expr
     (11) expr -> expr . - expr
     (12) expr -> expr . + expr
-  ! shift/reduce conflict for % resolved as shift
-  ! shift/reduce conflict for / resolved as shift
-  ! shift/reduce conflict for * resolved as shift
-  ! shift/reduce conflict for - resolved as shift
-  ! shift/reduce conflict for + resolved as shift
     )               reduce using rule 10 (expr -> expr * expr .)
-    %               shift and go to state 13
-    /               shift and go to state 14
-    *               shift and go to state 15
-    -               shift and go to state 16
-    +               shift and go to state 17
+    %               reduce using rule 10 (expr -> expr * expr .)
+    /               reduce using rule 10 (expr -> expr * expr .)
+    *               reduce using rule 10 (expr -> expr * expr .)
+    -               reduce using rule 10 (expr -> expr * expr .)
+    +               reduce using rule 10 (expr -> expr * expr .)
 
 
 state 23
@@ -373,17 +368,12 @@ state 23
     (10) expr -> expr . * expr
     (11) expr -> expr . - expr
     (12) expr -> expr . + expr
-  ! shift/reduce conflict for % resolved as shift
-  ! shift/reduce conflict for / resolved as shift
-  ! shift/reduce conflict for * resolved as shift
-  ! shift/reduce conflict for - resolved as shift
-  ! shift/reduce conflict for + resolved as shift
     )               reduce using rule 11 (expr -> expr - expr .)
+    -               reduce using rule 11 (expr -> expr - expr .)
+    +               reduce using rule 11 (expr -> expr - expr .)
     %               shift and go to state 13
     /               shift and go to state 14
     *               shift and go to state 15
-    -               shift and go to state 16
-    +               shift and go to state 17
 
 
 state 24
@@ -394,43 +384,9 @@ state 24
     (10) expr -> expr . * expr
     (11) expr -> expr . - expr
     (12) expr -> expr . + expr
-  ! shift/reduce conflict for % resolved as shift
-  ! shift/reduce conflict for / resolved as shift
-  ! shift/reduce conflict for * resolved as shift
-  ! shift/reduce conflict for - resolved as shift
-  ! shift/reduce conflict for + resolved as shift
     )               reduce using rule 12 (expr -> expr + expr .)
+    -               reduce using rule 12 (expr -> expr + expr .)
+    +               reduce using rule 12 (expr -> expr + expr .)
     %               shift and go to state 13
     /               shift and go to state 14
     *               shift and go to state 15
-    -               shift and go to state 16
-    +               shift and go to state 17
-
-
-Conflicts:
-
-shift/reduce conflict for % in state 20 resolved as shift
-shift/reduce conflict for / in state 20 resolved as shift
-shift/reduce conflict for * in state 20 resolved as shift
-shift/reduce conflict for - in state 20 resolved as shift
-shift/reduce conflict for + in state 20 resolved as shift
-shift/reduce conflict for % in state 21 resolved as shift
-shift/reduce conflict for / in state 21 resolved as shift
-shift/reduce conflict for * in state 21 resolved as shift
-shift/reduce conflict for - in state 21 resolved as shift
-shift/reduce conflict for + in state 21 resolved as shift
-shift/reduce conflict for % in state 22 resolved as shift
-shift/reduce conflict for / in state 22 resolved as shift
-shift/reduce conflict for * in state 22 resolved as shift
-shift/reduce conflict for - in state 22 resolved as shift
-shift/reduce conflict for + in state 22 resolved as shift
-shift/reduce conflict for % in state 23 resolved as shift
-shift/reduce conflict for / in state 23 resolved as shift
-shift/reduce conflict for * in state 23 resolved as shift
-shift/reduce conflict for - in state 23 resolved as shift
-shift/reduce conflict for + in state 23 resolved as shift
-shift/reduce conflict for % in state 24 resolved as shift
-shift/reduce conflict for / in state 24 resolved as shift
-shift/reduce conflict for * in state 24 resolved as shift
-shift/reduce conflict for - in state 24 resolved as shift
-shift/reduce conflict for + in state 24 resolved as shift

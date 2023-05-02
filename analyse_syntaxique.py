@@ -9,6 +9,15 @@ class FloParser(Parser):
 	tokens = FloLexer.tokens
 	# Règles gramaticales et actions associées
 
+	precedence = (
+		('left', 'ET', 'OU'),
+		('right', 'NON'),
+		('left', 'INFERIEUR', 'SUPERIEUR', 'EGAL', 'DIFFERENT', 'INFERIEUR_OU_EGAL', 'SUPERIEUR_OU_EGAL'),
+		('left', '+', '-'),
+		('left', '*', '/', '%'),
+		('left', '(', ')'),
+	)
+
 	@_('listeInstructions')
 	def prog(self, p):
 		return arbre_abstrait.Programme(p[0])
