@@ -12,7 +12,7 @@ class FloParser(Parser):
 	precedence = (
 		('left', 'ET', 'OU'),
 		('right', 'NON'),
-		('left', 'INFERIEUR', 'SUPERIEUR', 'EGAL', 'DIFFERENT', 'INFERIEUR_OU_EGAL', 'SUPERIEUR_OU_EGAL'),
+		('left', 'INFERIEUR_OU_EGAL', 'SUPERIEUR_OU_EGAL', 'EGAL', 'DIFFERENT', 'INFERIEUR', 'SUPERIEUR'),
 		('left', '+', '-'),
 		('left', '*', '/', '%'),
 		('left', '(', ')'),
@@ -72,6 +72,50 @@ class FloParser(Parser):
 	@_('ENTIER')
 	def expr(self, p):
 		return arbre_abstrait.Entier(p.ENTIER) #p.ENTIER = p[0]
+	
+	@_('expr INFERIEUR expr')
+	def expr(self, p):
+		return arbre_abstrait.Operation('<',p[0],p[2])
+	
+	@_('expr SUPERIEUR expr')
+	def expr(self, p):
+		return arbre_abstrait.Operation('>',p[0],p[2])
+	
+	@_('expr INFERIEUR_OU_EGAL expr')
+	def expr(self, p):
+		return arbre_abstrait.Operation('<=',p[0],p[2])
+	
+	@_('expr SUPERIEUR_OU_EGAL expr')
+	def expr(self, p):
+		return arbre_abstrait.Operation('>=',p[0],p[2])
+	
+	@_('expr EGAL expr')
+	def expr(self, p):
+		return arbre_abstrait.Operation('==',p[0],p[2])
+	
+	@_('expr DIFFERENT expr')
+	def expr(self, p):
+		return arbre_abstrait.Operation('!=',p[0],p[2])
+	
+	@_('expr ET expr')
+	def expr(self, p):
+		return arbre_abstrait.Operation('&&',p[0],p[2])
+	
+	@_('expr OU expr')
+	def expr(self, p):
+		return arbre_abstrait.Operation('||',p[0],p[2])
+	
+	@_('NON expr')
+	def expr(self, p):
+		return arbre_abstrait.Operation('!',p[1])
+	
+	@_('VRAI')
+	def expr(self, p):
+		return arbre_abstrait.Vrai()
+	
+	@_('FAUX')
+	def expr(self, p):
+		return arbre_abstrait.Faux()
 
 if __name__ == '__main__':
 	lexer = FloLexer()

@@ -3,8 +3,8 @@ from sly import Lexer
 
 class FloLexer(Lexer):
 	# Noms des lexèmes (sauf les litéraux). En majuscule. Ordre non important
-	tokens = { IDENTIFIANT, ENTIER, BOOLEEN, VRAI, FAUX, ECRIRE, LIRE, EGAL, DIFFERENT, INFERIEUR, SUPERIEUR, SUPERIEUR_OU_EGAL, INFERIEUR_OU_EGAL, SI, SINON, TANTQUE, ET, NON, OU, RETOURNER, TYPE_ENTIER, TYPE_BOOLEEN}
-
+	tokens = { IDENTIFIANT, ENTIER, BOOLEEN, "<", ">", "==", "!=", "<=", ">=", VRAI, FAUX, ECRIRE, LIRE, SI, SINON, TANTQUE, ET, NON, OU, RETOURNER, TYPE_ENTIER, TYPE_BOOLEEN, INFERIEUR, SUPERIEUR, SUPERIEUR_OU_EGAL, INFERIEUR_OU_EGAL, EGAL, DIFFERENT}
+	#
 	#Les caractères litéraux sont des caractères uniques qui sont retournés tel quel quand rencontré par l'analyse lexicale. 
 	#Les litéraux sont vérifiés en dernier, après toutes les autres règles définies par des expressions régulières.
 	#Donc, si une règle commence par un de ces littérals (comme INFERIEUR_OU_EGAL), cette règle aura la priorité.
@@ -48,6 +48,21 @@ class FloLexer(Lexer):
 	# types
 	IDENTIFIANT['entier'] = TYPE_ENTIER
 	IDENTIFIANT['booleen'] = TYPE_BOOLEEN
+
+	# comparaison
+	IDENTIFIANT['=='] = EGAL
+	IDENTIFIANT['!='] = DIFFERENT
+	IDENTIFIANT["<"] = INFERIEUR
+	IDENTIFIANT[">"] = SUPERIEUR
+	IDENTIFIANT[">="] = SUPERIEUR_OU_EGAL
+	IDENTIFIANT["<="] = INFERIEUR_OU_EGAL
+	
+	"""IDENTIFIANT['egal'] = EGAL
+	IDENTIFIANT['different'] = DIFFERENT
+	IDENTIFIANT['inferieur'] = INFERIEUR
+	IDENTIFIANT['superieur'] = SUPERIEUR
+	IDENTIFIANT['superieur_ou_egal'] = SUPERIEUR_OU_EGAL
+	IDENTIFIANT['inferieur_ou_egal'] = INFERIEUR_OU_EGAL"""
 	
 	#Syntaxe des commentaires à ignorer
 	ignore_comment = r'\#.*'
