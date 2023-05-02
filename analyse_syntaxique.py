@@ -37,13 +37,13 @@ class FloParser(Parser):
 	def instruction(self, p):
 		return p[0]
 
-#	@_('lire')
-#	def instruction(self, p):
-#		return p[0]
+	@_('IDENTIFIANT "=" LIRE "(" ")" ";"')
+	def instruction(self, p):
+		return arbre_abstrait.Lire(p[0])
 	
 	@_('ECRIRE "(" expr ")" ";"')
 	def ecrire(self, p):
-		return arbre_abstrait.Ecrire(p.expr) #p.expr = p[2]
+		return arbre_abstrait.Ecrire(p.expr)
 		
 	@_('expr "+" expr')
 	def expr(self, p):
