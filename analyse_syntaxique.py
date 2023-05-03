@@ -32,7 +32,24 @@ class FloParser(Parser):
 	def listeInstructions(self, p):
 		p[1].instructions.append(p[0])
 		return p[1]
-		
+	
+	'''
+		@_('listeSinonsi')
+	def prog(self, p):
+		return arbre_abstrait.listeSinonsi(p[0])
+
+	@_('sinonsi')
+	def listeSinonsi(self, p):
+		l = arbre_abstrait.listeSinonsi()
+		l.sinonsi.append(p[0])
+		return l
+
+
+	@_('sinonsi listeSinonsi')
+	def listeSinonsi(self, p):
+		p[1].sinonSi.append(p[0])
+		return p[1]
+	'''
 	@_('ecrire')
 	def instruction(self, p):
 		return p[0]
@@ -146,8 +163,8 @@ class FloParser(Parser):
 	"""@_('TANTQUE "(" expr ")" { listeInstructions }')
 	def instruction(self, p):
 		return arbre_abstrait.TantQue(p.expr,p.listeInstructions)"""
-'''
-
+	'''
+	'''
 	@_('SI "(" expr ")" "{" listeInstructions "}"',
 	   'SI "(" expr ")" "{" listeInstructions "}" listeSinonSi',
 	   'SI "(" expr ")" "{" listeInstructions "}" SINON "{" listeInstructions "}"',
@@ -171,7 +188,7 @@ class FloParser(Parser):
 	@_('SINON SI "(" expr ")" "{" listeInstructions "}"')
 	def listeSinonSi(self, p):
 		return arbre_abstrait.Conditionnelle(p[3],p[6],None,None)
-	
+	'''
 
 	@_('TYPE_ENTIER IDENTIFIANT ";"')
 	def declaration(self, p):
@@ -185,9 +202,7 @@ if __name__ == '__main__':
 	else:
 		with open(sys.argv[1],"r") as f:
 			data = f.read()
-			#print("==============================================\n",data, "\n==============================================\n")
 			try:
-				print((lexer.tokenize(data).__getattribute__),"\n=============================================")
 				arbre = parser.parse(lexer.tokenize(data))
 				arbre.afficher()
 			except EOFError:

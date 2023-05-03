@@ -99,7 +99,7 @@ def gen_expression(expression):
 	if type(expression) == arbre_abstrait.Operation:
 		gen_operation(expression) #on calcule et empile la valeur de l'opération
 	elif type(expression) == arbre_abstrait.Entier:
-      		nasm_instruction("push", str(expression.valeur), "", "", "") ; #on met sur la pile la valeur entière			
+			nasm_instruction("push", str(expression.valeur), "", "", "") ; #on met sur la pile la valeur entière			
 	else:
 		print("type d'expression inconnu",type(expression))
 		exit(0)

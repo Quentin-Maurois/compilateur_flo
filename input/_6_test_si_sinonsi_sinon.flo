@@ -1,0 +1,7 @@
+si (4 < 3) {
+    ecrire(1);
+} sinonsi (4 > 3) {
+    ecrire(2);
+} sinon {
+    ecrire(3);
+}
