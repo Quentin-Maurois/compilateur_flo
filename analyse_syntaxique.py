@@ -117,11 +117,12 @@ class FloParser(Parser):
 	def expr(self, p):
 		return arbre_abstrait.Faux()
 	
+	'''
 	@_('SI "(" expr ")" "{" listeInstructions "}"',
-       'SI "(" expr ")" "{" listeInstructions "}" listeSinonSi',
-       'SI "(" expr ")" "{" listeInstructions "}" SINON "{" listeInstructions "}"',
-       'SI "(" expr ")" "{" listeInstructions "}" listeSinonSi SINON "{" listeInstructions "}"'
-       )
+	   'SI "(" expr ")" "{" listeInstructions "}" listeSinonSi',
+	   'SI "(" expr ")" "{" listeInstructions "}" SINON "{" listeInstructions "}"',
+	   'SI "(" expr ")" "{" listeInstructions "}" listeSinonSi SINON "{" listeInstructions "}"'
+	   )
 	def conditionnelle(self, p):
 		print("conditionnelle", p)
 		conditions = [p[2]]
@@ -145,7 +146,31 @@ class FloParser(Parser):
 	"""@_('TANTQUE "(" expr ")" { listeInstructions }')
 	def instruction(self, p):
 		return arbre_abstrait.TantQue(p.expr,p.listeInstructions)"""
+'''
 
+	@_('SI "(" expr ")" "{" listeInstructions "}"',
+	   'SI "(" expr ")" "{" listeInstructions "}" listeSinonSi',
+	   'SI "(" expr ")" "{" listeInstructions "}" SINON "{" listeInstructions "}"',
+	   'SI "(" expr ")" "{" listeInstructions "}" listeSinonSi SINON "{" listeInstructions "}"'
+	   )
+	def conditionnelle(self, p):
+		if len(p) == 7:
+			return arbre_abstrait.Conditionnelle(p[2],p[5],None,None)
+		elif len(p) == 8:
+			return arbre_abstrait.Conditionnelle(p[2],p[5],p[7],None)
+		elif len(p) == 11:
+			return arbre_abstrait.Conditionnelle(p[2],p[5],None,p[9])
+		elif len(p) == 12:
+			return arbre_abstrait.Conditionnelle(p[2],p[5],p[7],p[10])
+
+
+	@_('listeSinonSi SINON SI "(" expr ")" "{" listeInstructions "}"')
+	def listeSinonSi(self, p):
+		return arbre_abstrait.Conditionnelle(p[4],p[7],p[0],None)
+
+	@_('SINON SI "(" expr ")" "{" listeInstructions "}"')
+	def listeSinonSi(self, p):
+		return arbre_abstrait.Conditionnelle(p[3],p[6],None,None)
 
 if __name__ == '__main__':
 	lexer = FloLexer()
@@ -155,7 +180,9 @@ if __name__ == '__main__':
 	else:
 		with open(sys.argv[1],"r") as f:
 			data = f.read()
+			#print("==============================================\n",data, "\n==============================================\n")
 			try:
+				print((lexer.tokenize(data).__getattribute__),"\n=============================================")
 				arbre = parser.parse(lexer.tokenize(data))
 				arbre.afficher()
 			except EOFError:

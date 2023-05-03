@@ -3,76 +3,52 @@ from sly import Lexer
 
 class FloLexer(Lexer):
 	# Noms des lexèmes (sauf les litéraux). En majuscule. Ordre non important
-	tokens = { IDENTIFIANT, ENTIER, BOOLEEN, "<", ">", "==", "!=", "<=", ">=", "{", "}", "(", ")", VRAI, FAUX, ECRIRE, LIRE, SI, SINON, SINON_SI, TANTQUE, ET, NON, OU, RETOURNER, TYPE_ENTIER, TYPE_BOOLEEN, INFERIEUR, SUPERIEUR, SUPERIEUR_OU_EGAL, INFERIEUR_OU_EGAL, EGAL, DIFFERENT,
-	   PARENTHESE_OUVRANTE, PARENTHESE_FERMANTE, ACCOLADE_OUVRANTE, ACCOLADE_FERMANTE}
-	#
+	tokens = {  IDENTIFIANT, ENTIER, ECRIRE, LIRE, TYPE_ENTIER, TYPE_BOOLEEN, INFERIEUR, INFERIEUR_OU_EGAL, SUPERIEUR, SUPERIEUR_OU_EGAL, EGAL, DIFFERENT, ET, OU, NON, VRAI, FAUX, SI, SINON,TANT_QUE, RETOURNER}
+
 	#Les caractères litéraux sont des caractères uniques qui sont retournés tel quel quand rencontré par l'analyse lexicale. 
 	#Les litéraux sont vérifiés en dernier, après toutes les autres règles définies par des expressions régulières.
 	#Donc, si une règle commence par un de ces littérals (comme INFERIEUR_OU_EGAL), cette règle aura la priorité.
-	literals = { '+','*','(',')',";",",","{","}","=",">","<","%","-","/","!" }
-	
+	literals = {'+','-','*','/','%','(',')',";",'{','}','<','>','=','!',','}
+
 	# chaines contenant les caractère à ignorer. Ici espace et tabulation
 	ignore = ' \t'
-
-	# Expressions régulières correspondant au différents Lexèmes par ordre de priorité
-
 	
+	#Syntaxe des commentaires à ignorer
+	ignore_comment = r'\#.*'
+
+
 	@_(r'0|[1-9][0-9]*')
 	def ENTIER(self, t):
 		t.value = int(t.value)
 		return t
 
-    	# cas général
-	IDENTIFIANT = r'[a-zA-Z][a-zA-Z0-9_]*' #en général, variable ou nom de fonction
+	# IDENTIFIANTS : caractères alphanumériques commencant par une lettre
+	IDENTIFIANT = r'[a-zA-Z][a-zA-Z0-9_]*' 
 
-	# cas spéciaux:
-	IDENTIFIANT['ecrire'] = ECRIRE
-	IDENTIFIANT['lire'] = LIRE
+	# Boucles et fonctions du langage
 	IDENTIFIANT['si'] = SI
 	IDENTIFIANT['sinon'] = SINON
-	IDENTIFIANT['sinonsi'] = SINON_SI
-	IDENTIFIANT['tantque'] = TANTQUE
+	IDENTIFIANT['tantque'] = TANT_QUE
+	IDENTIFIANT['lire'] = LIRE
+	IDENTIFIANT['ecrire'] = ECRIRE
 	IDENTIFIANT['et'] = ET
-	IDENTIFIANT['non'] = NON
 	IDENTIFIANT['ou'] = OU
-	IDENTIFIANT['vrai'] = VRAI
-	IDENTIFIANT['faux'] = FAUX
+	IDENTIFIANT['non'] = NON
+	IDENTIFIANT['Vrai'] = VRAI
+	IDENTIFIANT['Faux'] = FAUX
 	IDENTIFIANT['retourner'] = RETOURNER
 
 	# types
-	IDENTIFIANT['entier'] = TYPE_ENTIER
 	IDENTIFIANT['booleen'] = TYPE_BOOLEEN
+	IDENTIFIANT['entier'] = TYPE_ENTIER
 
-
-	
-	#opérateurs
-	INFERIEUR_OU_EGAL= r'<='
+	# Outils de comparation
+	INFERIEUR = r'<'
+	INFERIEUR_OU_EGAL = r'<='
+	SUPERIEUR = r'>'
 	SUPERIEUR_OU_EGAL = r'>='
 	EGAL = r'=='
 	DIFFERENT = r'!='
-	INFERIEUR = r'<'
-	SUPERIEUR = r'>'
-
-	# comparaison
-	IDENTIFIANT['=='] = EGAL
-	IDENTIFIANT['!='] = DIFFERENT
-	IDENTIFIANT["<"] = INFERIEUR
-	IDENTIFIANT[">"] = SUPERIEUR
-	IDENTIFIANT[">="] = SUPERIEUR_OU_EGAL
-	IDENTIFIANT["<="] = INFERIEUR_OU_EGAL
-
-	# formalisme
-	"""ACCOLADE_OUVRANTE = r'{'
-	ACCOLADE_FERMANTE = r'}'
-	PARENTHESE_OUVRANTE = r'('
-	PARENTHESE_FERMANTE = r')'"""
-	IDENTIFIANT['{'] = ACCOLADE_OUVRANTE
-	IDENTIFIANT['}'] = ACCOLADE_FERMANTE
-	IDENTIFIANT['('] = PARENTHESE_OUVRANTE
-	IDENTIFIANT[')'] = PARENTHESE_FERMANTE
-
-	#Syntaxe des commentaires à ignorer
-	ignore_comment = r'\#.*'
 
 	# Permet de conserver les numéros de ligne. Utile pour les messages d'erreurs
 	@_(r'\n+')
