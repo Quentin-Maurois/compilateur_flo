@@ -100,3 +100,14 @@ class TantQue:
 		self.condition.afficher(indent+1)
 		self.faire.afficher(indent+1)
 		afficher("</tantQue>",indent)
+
+
+class Declaration:
+	def __init__(self, type, nom):
+		self.type = type
+		self.nom = nom
+	def afficher(self, indent = 0):
+		afficher("<declaration>", indent)
+		self.type.afficher(indent + 1)
+		self.nom.afficher(indent + 1)
+		afficher("</declaration>", indent)

@@ -171,6 +171,11 @@ class FloParser(Parser):
 	@_('SINON SI "(" expr ")" "{" listeInstructions "}"')
 	def listeSinonSi(self, p):
 		return arbre_abstrait.Conditionnelle(p[3],p[6],None,None)
+	
+
+	@_('TYPE_ENTIER IDENTIFIANT ";"')
+	def declaration(self, p):
+		return arbre_abstrait.Declaration(p[0], p.IDENTIFIANT)
 
 if __name__ == '__main__':
 	lexer = FloLexer()
