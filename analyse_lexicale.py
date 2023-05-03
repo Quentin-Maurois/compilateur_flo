@@ -3,7 +3,7 @@ from sly import Lexer
 
 class FloLexer(Lexer):
 	# Noms des lexèmes (sauf les litéraux). En majuscule. Ordre non important
-	tokens = {  IDENTIFIANT, ENTIER, ECRIRE, LIRE, TYPE_ENTIER, TYPE_BOOLEEN, INFERIEUR, INFERIEUR_OU_EGAL, SUPERIEUR, SUPERIEUR_OU_EGAL, EGAL, DIFFERENT, ET, OU, NON, VRAI, FAUX, SI, SINON,TANT_QUE, RETOURNER}
+	tokens = {  IDENTIFIANT, ENTIER, ECRIRE, LIRE, TYPE_ENTIER, TYPE_BOOLEEN, INFERIEUR, INFERIEUR_OU_EGAL, SUPERIEUR, SUPERIEUR_OU_EGAL, EGAL, DIFFERENT, ET, OU, NON, VRAI, FAUX, SI, SINON, SINON_SI,TANT_QUE, RETOURNER}
 
 	#Les caractères litéraux sont des caractères uniques qui sont retournés tel quel quand rencontré par l'analyse lexicale. 
 	#Les litéraux sont vérifiés en dernier, après toutes les autres règles définies par des expressions régulières.
@@ -16,7 +16,7 @@ class FloLexer(Lexer):
 	#Syntaxe des commentaires à ignorer
 	ignore_comment = r'\#.*'
 
-
+	
 	@_(r'0|[1-9][0-9]*')
 	def ENTIER(self, t):
 		t.value = int(t.value)
@@ -25,30 +25,48 @@ class FloLexer(Lexer):
 	# IDENTIFIANTS : caractères alphanumériques commencant par une lettre
 	IDENTIFIANT = r'[a-zA-Z][a-zA-Z0-9_]*' 
 
-	# Boucles et fonctions du langage
+	# cas spéciaux:
+	IDENTIFIANT['ecrire'] = ECRIRE
+	IDENTIFIANT['lire'] = LIRE
 	IDENTIFIANT['si'] = SI
 	IDENTIFIANT['sinon'] = SINON
+	IDENTIFIANT['sinonsi'] = SINON_SI
 	IDENTIFIANT['tantque'] = TANT_QUE
-	IDENTIFIANT['lire'] = LIRE
-	IDENTIFIANT['ecrire'] = ECRIRE
 	IDENTIFIANT['et'] = ET
-	IDENTIFIANT['ou'] = OU
 	IDENTIFIANT['non'] = NON
-	IDENTIFIANT['Vrai'] = VRAI
-	IDENTIFIANT['Faux'] = FAUX
+	IDENTIFIANT['ou'] = OU
+	IDENTIFIANT['vrai'] = VRAI
+	IDENTIFIANT['faux'] = FAUX
 	IDENTIFIANT['retourner'] = RETOURNER
 
 	# types
-	IDENTIFIANT['booleen'] = TYPE_BOOLEEN
 	IDENTIFIANT['entier'] = TYPE_ENTIER
+	IDENTIFIANT['booleen'] = TYPE_BOOLEEN
 
-	# Outils de comparation
-	INFERIEUR = r'<'
-	INFERIEUR_OU_EGAL = r'<='
-	SUPERIEUR = r'>'
+
+	
+	#opérateurs
+	"""
+	INFERIEUR_OU_EGAL= r'<='
 	SUPERIEUR_OU_EGAL = r'>='
 	EGAL = r'=='
 	DIFFERENT = r'!='
+	INFERIEUR = r'<'
+	SUPERIEUR = r'>'"""
+
+	# comparaison
+	IDENTIFIANT['=='] = EGAL
+	IDENTIFIANT['!='] = DIFFERENT
+	IDENTIFIANT["<"] = INFERIEUR
+	IDENTIFIANT[">"] = SUPERIEUR
+	IDENTIFIANT[">="] = SUPERIEUR_OU_EGAL
+	IDENTIFIANT["<="] = INFERIEUR_OU_EGAL
+
+	# formalisme
+	"""IDENTIFIANT['{'] = ACCOLADE_OUVRANTE
+	IDENTIFIANT['}'] = ACCOLADE_FERMANTE
+	IDENTIFIANT['('] = PARENTHESE_OUVRANTE
+	IDENTIFIANT[')'] = PARENTHESE_FERMANTE"""
 
 	# Permet de conserver les numéros de ligne. Utile pour les messages d'erreurs
 	@_(r'\n+')

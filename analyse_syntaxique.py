@@ -32,24 +32,23 @@ class FloParser(Parser):
 	def listeInstructions(self, p):
 		p[1].instructions.append(p[0])
 		return p[1]
-	
-	'''
-		@_('listeSinonsi')
+
+	@_('listeSinonsi')
 	def prog(self, p):
 		return arbre_abstrait.listeSinonsi(p[0])
 
-	@_('sinonsi')
+	@_('SINON_SI')
 	def listeSinonsi(self, p):
 		l = arbre_abstrait.listeSinonsi()
 		l.sinonsi.append(p[0])
 		return l
 
 
-	@_('sinonsi listeSinonsi')
+	@_('SINON_SI listeSinonsi')
 	def listeSinonsi(self, p):
 		p[1].sinonSi.append(p[0])
 		return p[1]
-	'''
+		
 	@_('ecrire')
 	def instruction(self, p):
 		return p[0]
@@ -134,64 +133,37 @@ class FloParser(Parser):
 	def expr(self, p):
 		return arbre_abstrait.Faux()
 	
-	'''
+	
 	@_('SI "(" expr ")" "{" listeInstructions "}"',
-	   'SI "(" expr ")" "{" listeInstructions "}" listeSinonSi',
-	   'SI "(" expr ")" "{" listeInstructions "}" SINON "{" listeInstructions "}"',
-	   'SI "(" expr ")" "{" listeInstructions "}" listeSinonSi SINON "{" listeInstructions "}"'
-	   )
-	def conditionnelle(self, p):
-		print("conditionnelle", p)
+       'SI "(" expr ")" "{" listeInstructions "}" SINON_SI',
+       'SI "(" expr ")" "{" listeInstructions "}" SINON "{" listeInstructions "}"',
+       'SI "(" expr ")" "{" listeInstructions "}" SINON_SI SINON "{" listeInstructions "}"'
+       )
+	def instruction(self, p):
 		conditions = [p[2]]
 		instructions = [p[5]]
-		for i in range(6,len(p),2):
-			conditions.append(p[i])
-			instructions.append(p[i+3])
+		if len(p) == 8:
+			instructions.append(p[-1])
+		elif len(p) == 12:
+			instructions.append(p[-5])
 		if len(p) == 11 or len(p) == 12:
-			instructions.append(p[len(p)-2])
+			instructions.append(p[-2])
 		return arbre_abstrait.Conditionnelle(conditions,instructions)
 	
-	@_('SINON_SI "(" expr ")" "{" listeInstructions "}"',
-	   'SINON_SI "(" expr ")" "{" listeInstructions "}" listeSinonSi'
+	"""@_('SINON_SI "(" expr ")" "{" listeInstructions "}"',
 	   )
-	def listeSinonSi(self, p):
+	def instruction(self, p):
 		if len(p) == 8:
-			return self.conditionnelle(p[2],p[5])
+			return arbre_abstrait.Conditionnelle(p[2],p[5])
 		elif len(p) == 9:
-			return self.conditionnelle(p[2],[p[5], p[7]])
-		
+			return arbre_abstrait.Conditionnelle(p[2],[p[5], p[7]])
+		"""
 	"""@_('TANTQUE "(" expr ")" { listeInstructions }')
 	def instruction(self, p):
 		return arbre_abstrait.TantQue(p.expr,p.listeInstructions)"""
-	'''
-	'''
-	@_('SI "(" expr ")" "{" listeInstructions "}"',
-	   'SI "(" expr ")" "{" listeInstructions "}" listeSinonSi',
-	   'SI "(" expr ")" "{" listeInstructions "}" SINON "{" listeInstructions "}"',
-	   'SI "(" expr ")" "{" listeInstructions "}" listeSinonSi SINON "{" listeInstructions "}"'
-	   )
-	def conditionnelle(self, p):
-		if len(p) == 7:
-			return arbre_abstrait.Conditionnelle(p[2],p[5],None,None)
-		elif len(p) == 8:
-			return arbre_abstrait.Conditionnelle(p[2],p[5],p[7],None)
-		elif len(p) == 11:
-			return arbre_abstrait.Conditionnelle(p[2],p[5],None,p[9])
-		elif len(p) == 12:
-			return arbre_abstrait.Conditionnelle(p[2],p[5],p[7],p[10])
-
-
-	@_('listeSinonSi SINON SI "(" expr ")" "{" listeInstructions "}"')
-	def listeSinonSi(self, p):
-		return arbre_abstrait.Conditionnelle(p[4],p[7],p[0],None)
-
-	@_('SINON SI "(" expr ")" "{" listeInstructions "}"')
-	def listeSinonSi(self, p):
-		return arbre_abstrait.Conditionnelle(p[3],p[6],None,None)
-	'''
 
 	@_('TYPE_ENTIER IDENTIFIANT ";"')
-	def declaration(self, p):
+	def instruction(self, p):
 		return arbre_abstrait.Declaration(p[0], p.IDENTIFIANT)
 
 if __name__ == '__main__':

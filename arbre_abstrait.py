@@ -1,6 +1,7 @@
 """
 Affiche une chaine de caractère avec une certaine identation
 """
+
 def afficher(s,indent=0):
 	print(" "*indent+s)
 	
@@ -104,7 +105,6 @@ class Conditionnelle:
 		self.instructions = instructions
 
 	def afficher(self,indent=0):
-		print(self.instructions)
 		afficher("<Conditionnelle>",indent)
 		afficher("<Si>",indent+1)
 		self.expressions[0].afficher(indent+2)
