@@ -4,108 +4,108 @@ Rule 0     S' -> prog
 Rule 1     prog -> listeInstructions
 Rule 2     listeInstructions -> instruction listeInstructions
 Rule 3     listeInstructions -> instruction
-Rule 4     instruction -> IDENTIFIANT = LIRE ( ) ;
-Rule 5     instruction -> ecrire
-Rule 6     ecrire -> ECRIRE ( expr ) ;
-Rule 7     expr -> FAUX
-Rule 8     expr -> VRAI
-Rule 9     expr -> NON expr  [precedence=right, level=2]
-Rule 10    expr -> expr OU expr  [precedence=left, level=1]
-Rule 11    expr -> expr ET expr  [precedence=left, level=1]
-Rule 12    expr -> expr DIFFERENT expr  [precedence=left, level=3]
-Rule 13    expr -> expr EGAL expr  [precedence=left, level=3]
-Rule 14    expr -> expr SUPERIEUR_OU_EGAL expr  [precedence=left, level=3]
-Rule 15    expr -> expr INFERIEUR_OU_EGAL expr  [precedence=left, level=3]
-Rule 16    expr -> expr SUPERIEUR expr  [precedence=left, level=3]
-Rule 17    expr -> expr INFERIEUR expr  [precedence=left, level=3]
-Rule 18    expr -> ENTIER
-Rule 19    expr -> ( expr )  [precedence=left, level=6]
-Rule 20    expr -> expr % expr  [precedence=left, level=5]
-Rule 21    expr -> expr / expr  [precedence=left, level=5]
-Rule 22    expr -> expr * expr  [precedence=left, level=5]
-Rule 23    expr -> expr - expr  [precedence=left, level=4]
-Rule 24    expr -> expr + expr  [precedence=left, level=4]
-Rule 25    conditionnelle -> SI ( expr ) { listeInstructions } listeSinonSi SINON { listeInstructions }
-Rule 26    conditionnelle -> SI ( expr ) { listeInstructions } SINON { listeInstructions }
-Rule 27    conditionnelle -> SI ( expr ) { listeInstructions } listeSinonSi
-Rule 28    conditionnelle -> SI ( expr ) { listeInstructions }
-Rule 29    listeSinonSi -> SINON_SI ( expr ) { listeInstructions } listeSinonSi
-Rule 30    listeSinonSi -> SINON_SI ( expr ) { listeInstructions }
+Rule 4     listeSinonsi -> instruction listeInstructions
+Rule 5     listeSinonsi -> instruction
+Rule 6     instruction -> SI ( expr ) { listeInstructions } listeSinonsi SINON { listeInstructions }
+Rule 7     instruction -> SI ( expr ) { listeInstructions } SINON { listeInstructions }
+Rule 8     instruction -> SI ( expr ) { listeInstructions } listeSinonsi
+Rule 9     instruction -> SI ( expr ) { listeInstructions }
+Rule 10    instruction -> IDENTIFIANT = LIRE ( ) ;
+Rule 11    instruction -> ecrire
+Rule 12    ecrire -> ECRIRE ( expr ) ;
+Rule 13    expr -> FAUX
+Rule 14    expr -> VRAI
+Rule 15    expr -> NON expr  [precedence=right, level=2]
+Rule 16    expr -> expr OU expr  [precedence=left, level=1]
+Rule 17    expr -> expr ET expr  [precedence=left, level=1]
+Rule 18    expr -> expr DIFFERENT expr  [precedence=left, level=3]
+Rule 19    expr -> expr EGAL expr  [precedence=left, level=3]
+Rule 20    expr -> expr SUPERIEUR_OU_EGAL expr  [precedence=left, level=3]
+Rule 21    expr -> expr INFERIEUR_OU_EGAL expr  [precedence=left, level=3]
+Rule 22    expr -> expr SUPERIEUR expr  [precedence=left, level=3]
+Rule 23    expr -> expr INFERIEUR expr  [precedence=left, level=3]
+Rule 24    expr -> ENTIER
+Rule 25    expr -> ( expr )  [precedence=left, level=6]
+Rule 26    expr -> expr % expr  [precedence=left, level=5]
+Rule 27    expr -> expr / expr  [precedence=left, level=5]
+Rule 28    expr -> expr * expr  [precedence=left, level=5]
+Rule 29    expr -> expr - expr  [precedence=left, level=4]
+Rule 30    expr -> expr + expr  [precedence=left, level=4]
 
 Unused terminals:
 
-    TYPE_BOOLEEN
-    TYPE_ENTIER
-    !=
     <=
-    BOOLEEN
     >=
-    ACCOLADE_FERMANTE
+    !=
     >
-    PARENTHESE_FERMANTE
-    TANTQUE
+    TYPE_ENTIER
     RETOURNER
     ==
+    TYPE_BOOLEEN
+    ACCOLADE_FERMANTE
+    PARENTHESE_FERMANTE
+    BOOLEEN
+    SINON_SI
     ACCOLADE_OUVRANTE
-    <
     PARENTHESE_OUVRANTE
+    TANTQUE
+    <
 
 Terminals, with rules where they appear:
 
 !=                   : 
-%                    : 20
-(                    : 4 6 19 25 26 27 28 29 30
-)                    : 4 6 19 25 26 27 28 29 30
-*                    : 22
-+                    : 24
--                    : 23
-/                    : 21
-;                    : 4 6
+%                    : 26
+(                    : 6 7 8 9 10 12 25
+)                    : 6 7 8 9 10 12 25
+*                    : 28
++                    : 30
+-                    : 29
+/                    : 27
+;                    : 10 12
 <                    : 
 <=                   : 
-=                    : 4
+=                    : 10
 ==                   : 
 >                    : 
 >=                   : 
 ACCOLADE_FERMANTE    : 
 ACCOLADE_OUVRANTE    : 
 BOOLEEN              : 
-DIFFERENT            : 12
-ECRIRE               : 6
-EGAL                 : 13
-ENTIER               : 18
-ET                   : 11
-FAUX                 : 7
-IDENTIFIANT          : 4
-INFERIEUR            : 17
-INFERIEUR_OU_EGAL    : 15
-LIRE                 : 4
-NON                  : 9
-OU                   : 10
+DIFFERENT            : 18
+ECRIRE               : 12
+EGAL                 : 19
+ENTIER               : 24
+ET                   : 17
+FAUX                 : 13
+IDENTIFIANT          : 10
+INFERIEUR            : 23
+INFERIEUR_OU_EGAL    : 21
+LIRE                 : 10
+NON                  : 15
+OU                   : 16
 PARENTHESE_FERMANTE  : 
 PARENTHESE_OUVRANTE  : 
 RETOURNER            : 
-SI                   : 25 26 27 28
-SINON                : 25 26
-SINON_SI             : 29 30
-SUPERIEUR            : 16
-SUPERIEUR_OU_EGAL    : 14
+SI                   : 6 7 8 9
+SINON                : 6 7
+SINON_SI             : 
+SUPERIEUR            : 22
+SUPERIEUR_OU_EGAL    : 20
 TANTQUE              : 
 TYPE_BOOLEEN         : 
 TYPE_ENTIER          : 
-VRAI                 : 8
+VRAI                 : 14
 error                : 
-{                    : 25 25 26 26 27 28 29 30
-}                    : 25 25 26 26 27 28 29 30
+{                    : 6 6 7 7 8 9
+}                    : 6 6 7 7 8 9
 
 Nonterminals, with rules where they appear:
 
-conditionnelle       : 
-ecrire               : 5
-expr                 : 6 9 10 10 11 11 12 12 13 13 14 14 15 15 16 16 17 17 19 20 20 21 21 22 22 23 23 24 24 25 26 27 28 29 30
-instruction          : 2 3
-listeInstructions    : 1 2 25 25 26 26 27 28 29 30
-listeSinonSi         : 25 27 29
+ecrire               : 11
+expr                 : 6 7 8 9 12 15 16 16 17 17 18 18 19 19 20 20 21 21 22 22 23 23 25 26 26 27 27 28 28 29 29 30 30
+instruction          : 2 3 4 5
+listeInstructions    : 1 2 4 6 6 7 7 8 9
+listeSinonsi         : 6 8
 prog                 : 0
 
 
@@ -115,16 +115,21 @@ state 0
     (1) prog -> . listeInstructions
     (2) listeInstructions -> . instruction listeInstructions
     (3) listeInstructions -> . instruction
-    (4) instruction -> . IDENTIFIANT = LIRE ( ) ;
-    (5) instruction -> . ecrire
-    (6) ecrire -> . ECRIRE ( expr ) ;
-    IDENTIFIANT     shift and go to state 4
-    ECRIRE          shift and go to state 6
+    (6) instruction -> . SI ( expr ) { listeInstructions } listeSinonsi SINON { listeInstructions }
+    (7) instruction -> . SI ( expr ) { listeInstructions } SINON { listeInstructions }
+    (8) instruction -> . SI ( expr ) { listeInstructions } listeSinonsi
+    (9) instruction -> . SI ( expr ) { listeInstructions }
+    (10) instruction -> . IDENTIFIANT = LIRE ( ) ;
+    (11) instruction -> . ecrire
+    (12) ecrire -> . ECRIRE ( expr ) ;
+    SI              shift and go to state 4
+    IDENTIFIANT     shift and go to state 5
+    ECRIRE          shift and go to state 7
 
     prog                           shift and go to state 1
     listeInstructions              shift and go to state 2
     instruction                    shift and go to state 3
-    ecrire                         shift and go to state 5
+    ecrire                         shift and go to state 6
 
 state 1
 
@@ -143,1136 +148,1459 @@ state 3
     (3) listeInstructions -> instruction .
     (2) listeInstructions -> . instruction listeInstructions
     (3) listeInstructions -> . instruction
-    (4) instruction -> . IDENTIFIANT = LIRE ( ) ;
-    (5) instruction -> . ecrire
-    (6) ecrire -> . ECRIRE ( expr ) ;
+    (6) instruction -> . SI ( expr ) { listeInstructions } listeSinonsi SINON { listeInstructions }
+    (7) instruction -> . SI ( expr ) { listeInstructions } SINON { listeInstructions }
+    (8) instruction -> . SI ( expr ) { listeInstructions } listeSinonsi
+    (9) instruction -> . SI ( expr ) { listeInstructions }
+    (10) instruction -> . IDENTIFIANT = LIRE ( ) ;
+    (11) instruction -> . ecrire
+    (12) ecrire -> . ECRIRE ( expr ) ;
+  ! shift/reduce conflict for SI resolved as shift
+  ! shift/reduce conflict for IDENTIFIANT resolved as shift
+  ! shift/reduce conflict for ECRIRE resolved as shift
     $end            reduce using rule 3 (listeInstructions -> instruction .)
-    IDENTIFIANT     shift and go to state 4
-    ECRIRE          shift and go to state 6
+    }               reduce using rule 3 (listeInstructions -> instruction .)
+    SINON           reduce using rule 3 (listeInstructions -> instruction .)
+    SI              shift and go to state 4
+    IDENTIFIANT     shift and go to state 5
+    ECRIRE          shift and go to state 7
 
     instruction                    shift and go to state 3
-    listeInstructions              shift and go to state 7
-    ecrire                         shift and go to state 5
+    listeInstructions              shift and go to state 8
+    ecrire                         shift and go to state 6
 
 state 4
 
-    (4) instruction -> IDENTIFIANT . = LIRE ( ) ;
-    =               shift and go to state 8
+    (6) instruction -> SI . ( expr ) { listeInstructions } listeSinonsi SINON { listeInstructions }
+    (7) instruction -> SI . ( expr ) { listeInstructions } SINON { listeInstructions }
+    (8) instruction -> SI . ( expr ) { listeInstructions } listeSinonsi
+    (9) instruction -> SI . ( expr ) { listeInstructions }
+    (               shift and go to state 9
 
 
 state 5
 
-    (5) instruction -> ecrire .
-    IDENTIFIANT     reduce using rule 5 (instruction -> ecrire .)
-    ECRIRE          reduce using rule 5 (instruction -> ecrire .)
-    $end            reduce using rule 5 (instruction -> ecrire .)
+    (10) instruction -> IDENTIFIANT . = LIRE ( ) ;
+    =               shift and go to state 10
 
 
 state 6
 
-    (6) ecrire -> ECRIRE . ( expr ) ;
-    (               shift and go to state 9
+    (11) instruction -> ecrire .
+    SI              reduce using rule 11 (instruction -> ecrire .)
+    IDENTIFIANT     reduce using rule 11 (instruction -> ecrire .)
+    ECRIRE          reduce using rule 11 (instruction -> ecrire .)
+    $end            reduce using rule 11 (instruction -> ecrire .)
+    }               reduce using rule 11 (instruction -> ecrire .)
+    SINON           reduce using rule 11 (instruction -> ecrire .)
 
 
 state 7
 
-    (2) listeInstructions -> instruction listeInstructions .
-    $end            reduce using rule 2 (listeInstructions -> instruction listeInstructions .)
+    (12) ecrire -> ECRIRE . ( expr ) ;
+    (               shift and go to state 11
 
 
 state 8
 
-    (4) instruction -> IDENTIFIANT = . LIRE ( ) ;
-    LIRE            shift and go to state 10
+    (2) listeInstructions -> instruction listeInstructions .
+    $end            reduce using rule 2 (listeInstructions -> instruction listeInstructions .)
+    }               reduce using rule 2 (listeInstructions -> instruction listeInstructions .)
+    SINON           reduce using rule 2 (listeInstructions -> instruction listeInstructions .)
+    SI              reduce using rule 2 (listeInstructions -> instruction listeInstructions .)
+    IDENTIFIANT     reduce using rule 2 (listeInstructions -> instruction listeInstructions .)
+    ECRIRE          reduce using rule 2 (listeInstructions -> instruction listeInstructions .)
 
 
 state 9
 
-    (6) ecrire -> ECRIRE ( . expr ) ;
-    (7) expr -> . FAUX
-    (8) expr -> . VRAI
-    (9) expr -> . NON expr
-    (10) expr -> . expr OU expr
-    (11) expr -> . expr ET expr
-    (12) expr -> . expr DIFFERENT expr
-    (13) expr -> . expr EGAL expr
-    (14) expr -> . expr SUPERIEUR_OU_EGAL expr
-    (15) expr -> . expr INFERIEUR_OU_EGAL expr
-    (16) expr -> . expr SUPERIEUR expr
-    (17) expr -> . expr INFERIEUR expr
-    (18) expr -> . ENTIER
-    (19) expr -> . ( expr )
-    (20) expr -> . expr % expr
-    (21) expr -> . expr / expr
-    (22) expr -> . expr * expr
-    (23) expr -> . expr - expr
-    (24) expr -> . expr + expr
-    FAUX            shift and go to state 13
-    VRAI            shift and go to state 14
-    NON             shift and go to state 15
-    ENTIER          shift and go to state 16
-    (               shift and go to state 11
+    (6) instruction -> SI ( . expr ) { listeInstructions } listeSinonsi SINON { listeInstructions }
+    (7) instruction -> SI ( . expr ) { listeInstructions } SINON { listeInstructions }
+    (8) instruction -> SI ( . expr ) { listeInstructions } listeSinonsi
+    (9) instruction -> SI ( . expr ) { listeInstructions }
+    (13) expr -> . FAUX
+    (14) expr -> . VRAI
+    (15) expr -> . NON expr
+    (16) expr -> . expr OU expr
+    (17) expr -> . expr ET expr
+    (18) expr -> . expr DIFFERENT expr
+    (19) expr -> . expr EGAL expr
+    (20) expr -> . expr SUPERIEUR_OU_EGAL expr
+    (21) expr -> . expr INFERIEUR_OU_EGAL expr
+    (22) expr -> . expr SUPERIEUR expr
+    (23) expr -> . expr INFERIEUR expr
+    (24) expr -> . ENTIER
+    (25) expr -> . ( expr )
+    (26) expr -> . expr % expr
+    (27) expr -> . expr / expr
+    (28) expr -> . expr * expr
+    (29) expr -> . expr - expr
+    (30) expr -> . expr + expr
+    FAUX            shift and go to state 14
+    VRAI            shift and go to state 15
+    NON             shift and go to state 16
+    ENTIER          shift and go to state 17
+    (               shift and go to state 12
 
-    expr                           shift and go to state 12
+    expr                           shift and go to state 13
 
 state 10
 
-    (4) instruction -> IDENTIFIANT = LIRE . ( ) ;
-    (               shift and go to state 17
+    (10) instruction -> IDENTIFIANT = . LIRE ( ) ;
+    LIRE            shift and go to state 18
 
 
 state 11
 
-    (19) expr -> ( . expr )
-    (7) expr -> . FAUX
-    (8) expr -> . VRAI
-    (9) expr -> . NON expr
-    (10) expr -> . expr OU expr
-    (11) expr -> . expr ET expr
-    (12) expr -> . expr DIFFERENT expr
-    (13) expr -> . expr EGAL expr
-    (14) expr -> . expr SUPERIEUR_OU_EGAL expr
-    (15) expr -> . expr INFERIEUR_OU_EGAL expr
-    (16) expr -> . expr SUPERIEUR expr
-    (17) expr -> . expr INFERIEUR expr
-    (18) expr -> . ENTIER
-    (19) expr -> . ( expr )
-    (20) expr -> . expr % expr
-    (21) expr -> . expr / expr
-    (22) expr -> . expr * expr
-    (23) expr -> . expr - expr
-    (24) expr -> . expr + expr
-    FAUX            shift and go to state 13
-    VRAI            shift and go to state 14
-    NON             shift and go to state 15
-    ENTIER          shift and go to state 16
-    (               shift and go to state 11
+    (12) ecrire -> ECRIRE ( . expr ) ;
+    (13) expr -> . FAUX
+    (14) expr -> . VRAI
+    (15) expr -> . NON expr
+    (16) expr -> . expr OU expr
+    (17) expr -> . expr ET expr
+    (18) expr -> . expr DIFFERENT expr
+    (19) expr -> . expr EGAL expr
+    (20) expr -> . expr SUPERIEUR_OU_EGAL expr
+    (21) expr -> . expr INFERIEUR_OU_EGAL expr
+    (22) expr -> . expr SUPERIEUR expr
+    (23) expr -> . expr INFERIEUR expr
+    (24) expr -> . ENTIER
+    (25) expr -> . ( expr )
+    (26) expr -> . expr % expr
+    (27) expr -> . expr / expr
+    (28) expr -> . expr * expr
+    (29) expr -> . expr - expr
+    (30) expr -> . expr + expr
+    FAUX            shift and go to state 14
+    VRAI            shift and go to state 15
+    NON             shift and go to state 16
+    ENTIER          shift and go to state 17
+    (               shift and go to state 12
 
-    expr                           shift and go to state 18
+    expr                           shift and go to state 19
 
 state 12
 
-    (6) ecrire -> ECRIRE ( expr . ) ;
-    (10) expr -> expr . OU expr
-    (11) expr -> expr . ET expr
-    (12) expr -> expr . DIFFERENT expr
-    (13) expr -> expr . EGAL expr
-    (14) expr -> expr . SUPERIEUR_OU_EGAL expr
-    (15) expr -> expr . INFERIEUR_OU_EGAL expr
-    (16) expr -> expr . SUPERIEUR expr
-    (17) expr -> expr . INFERIEUR expr
-    (20) expr -> expr . % expr
-    (21) expr -> expr . / expr
-    (22) expr -> expr . * expr
-    (23) expr -> expr . - expr
-    (24) expr -> expr . + expr
-    )               shift and go to state 19
-    OU              shift and go to state 20
-    ET              shift and go to state 21
-    DIFFERENT       shift and go to state 22
-    EGAL            shift and go to state 23
-    SUPERIEUR_OU_EGAL shift and go to state 24
-    INFERIEUR_OU_EGAL shift and go to state 25
-    SUPERIEUR       shift and go to state 26
-    INFERIEUR       shift and go to state 27
-    %               shift and go to state 28
-    /               shift and go to state 29
-    *               shift and go to state 30
-    -               shift and go to state 31
-    +               shift and go to state 32
+    (25) expr -> ( . expr )
+    (13) expr -> . FAUX
+    (14) expr -> . VRAI
+    (15) expr -> . NON expr
+    (16) expr -> . expr OU expr
+    (17) expr -> . expr ET expr
+    (18) expr -> . expr DIFFERENT expr
+    (19) expr -> . expr EGAL expr
+    (20) expr -> . expr SUPERIEUR_OU_EGAL expr
+    (21) expr -> . expr INFERIEUR_OU_EGAL expr
+    (22) expr -> . expr SUPERIEUR expr
+    (23) expr -> . expr INFERIEUR expr
+    (24) expr -> . ENTIER
+    (25) expr -> . ( expr )
+    (26) expr -> . expr % expr
+    (27) expr -> . expr / expr
+    (28) expr -> . expr * expr
+    (29) expr -> . expr - expr
+    (30) expr -> . expr + expr
+    FAUX            shift and go to state 14
+    VRAI            shift and go to state 15
+    NON             shift and go to state 16
+    ENTIER          shift and go to state 17
+    (               shift and go to state 12
 
+    expr                           shift and go to state 20
 
 state 13
 
-    (7) expr -> FAUX .
-    )               reduce using rule 7 (expr -> FAUX .)
-    OU              reduce using rule 7 (expr -> FAUX .)
-    ET              reduce using rule 7 (expr -> FAUX .)
-    DIFFERENT       reduce using rule 7 (expr -> FAUX .)
-    EGAL            reduce using rule 7 (expr -> FAUX .)
-    SUPERIEUR_OU_EGAL reduce using rule 7 (expr -> FAUX .)
-    INFERIEUR_OU_EGAL reduce using rule 7 (expr -> FAUX .)
-    SUPERIEUR       reduce using rule 7 (expr -> FAUX .)
-    INFERIEUR       reduce using rule 7 (expr -> FAUX .)
-    %               reduce using rule 7 (expr -> FAUX .)
-    /               reduce using rule 7 (expr -> FAUX .)
-    *               reduce using rule 7 (expr -> FAUX .)
-    -               reduce using rule 7 (expr -> FAUX .)
-    +               reduce using rule 7 (expr -> FAUX .)
+    (6) instruction -> SI ( expr . ) { listeInstructions } listeSinonsi SINON { listeInstructions }
+    (7) instruction -> SI ( expr . ) { listeInstructions } SINON { listeInstructions }
+    (8) instruction -> SI ( expr . ) { listeInstructions } listeSinonsi
+    (9) instruction -> SI ( expr . ) { listeInstructions }
+    (16) expr -> expr . OU expr
+    (17) expr -> expr . ET expr
+    (18) expr -> expr . DIFFERENT expr
+    (19) expr -> expr . EGAL expr
+    (20) expr -> expr . SUPERIEUR_OU_EGAL expr
+    (21) expr -> expr . INFERIEUR_OU_EGAL expr
+    (22) expr -> expr . SUPERIEUR expr
+    (23) expr -> expr . INFERIEUR expr
+    (26) expr -> expr . % expr
+    (27) expr -> expr . / expr
+    (28) expr -> expr . * expr
+    (29) expr -> expr . - expr
+    (30) expr -> expr . + expr
+    )               shift and go to state 21
+    OU              shift and go to state 22
+    ET              shift and go to state 23
+    DIFFERENT       shift and go to state 24
+    EGAL            shift and go to state 25
+    SUPERIEUR_OU_EGAL shift and go to state 26
+    INFERIEUR_OU_EGAL shift and go to state 27
+    SUPERIEUR       shift and go to state 28
+    INFERIEUR       shift and go to state 29
+    %               shift and go to state 30
+    /               shift and go to state 31
+    *               shift and go to state 32
+    -               shift and go to state 33
+    +               shift and go to state 34
 
 
 state 14
 
-    (8) expr -> VRAI .
-    )               reduce using rule 8 (expr -> VRAI .)
-    OU              reduce using rule 8 (expr -> VRAI .)
-    ET              reduce using rule 8 (expr -> VRAI .)
-    DIFFERENT       reduce using rule 8 (expr -> VRAI .)
-    EGAL            reduce using rule 8 (expr -> VRAI .)
-    SUPERIEUR_OU_EGAL reduce using rule 8 (expr -> VRAI .)
-    INFERIEUR_OU_EGAL reduce using rule 8 (expr -> VRAI .)
-    SUPERIEUR       reduce using rule 8 (expr -> VRAI .)
-    INFERIEUR       reduce using rule 8 (expr -> VRAI .)
-    %               reduce using rule 8 (expr -> VRAI .)
-    /               reduce using rule 8 (expr -> VRAI .)
-    *               reduce using rule 8 (expr -> VRAI .)
-    -               reduce using rule 8 (expr -> VRAI .)
-    +               reduce using rule 8 (expr -> VRAI .)
+    (13) expr -> FAUX .
+    )               reduce using rule 13 (expr -> FAUX .)
+    OU              reduce using rule 13 (expr -> FAUX .)
+    ET              reduce using rule 13 (expr -> FAUX .)
+    DIFFERENT       reduce using rule 13 (expr -> FAUX .)
+    EGAL            reduce using rule 13 (expr -> FAUX .)
+    SUPERIEUR_OU_EGAL reduce using rule 13 (expr -> FAUX .)
+    INFERIEUR_OU_EGAL reduce using rule 13 (expr -> FAUX .)
+    SUPERIEUR       reduce using rule 13 (expr -> FAUX .)
+    INFERIEUR       reduce using rule 13 (expr -> FAUX .)
+    %               reduce using rule 13 (expr -> FAUX .)
+    /               reduce using rule 13 (expr -> FAUX .)
+    *               reduce using rule 13 (expr -> FAUX .)
+    -               reduce using rule 13 (expr -> FAUX .)
+    +               reduce using rule 13 (expr -> FAUX .)
 
 
 state 15
 
-    (9) expr -> NON . expr
-    (7) expr -> . FAUX
-    (8) expr -> . VRAI
-    (9) expr -> . NON expr
-    (10) expr -> . expr OU expr
-    (11) expr -> . expr ET expr
-    (12) expr -> . expr DIFFERENT expr
-    (13) expr -> . expr EGAL expr
-    (14) expr -> . expr SUPERIEUR_OU_EGAL expr
-    (15) expr -> . expr INFERIEUR_OU_EGAL expr
-    (16) expr -> . expr SUPERIEUR expr
-    (17) expr -> . expr INFERIEUR expr
-    (18) expr -> . ENTIER
-    (19) expr -> . ( expr )
-    (20) expr -> . expr % expr
-    (21) expr -> . expr / expr
-    (22) expr -> . expr * expr
-    (23) expr -> . expr - expr
-    (24) expr -> . expr + expr
-    FAUX            shift and go to state 13
-    VRAI            shift and go to state 14
-    NON             shift and go to state 15
-    ENTIER          shift and go to state 16
-    (               shift and go to state 11
+    (14) expr -> VRAI .
+    )               reduce using rule 14 (expr -> VRAI .)
+    OU              reduce using rule 14 (expr -> VRAI .)
+    ET              reduce using rule 14 (expr -> VRAI .)
+    DIFFERENT       reduce using rule 14 (expr -> VRAI .)
+    EGAL            reduce using rule 14 (expr -> VRAI .)
+    SUPERIEUR_OU_EGAL reduce using rule 14 (expr -> VRAI .)
+    INFERIEUR_OU_EGAL reduce using rule 14 (expr -> VRAI .)
+    SUPERIEUR       reduce using rule 14 (expr -> VRAI .)
+    INFERIEUR       reduce using rule 14 (expr -> VRAI .)
+    %               reduce using rule 14 (expr -> VRAI .)
+    /               reduce using rule 14 (expr -> VRAI .)
+    *               reduce using rule 14 (expr -> VRAI .)
+    -               reduce using rule 14 (expr -> VRAI .)
+    +               reduce using rule 14 (expr -> VRAI .)
 
-    expr                           shift and go to state 33
 
 state 16
 
-    (18) expr -> ENTIER .
-    )               reduce using rule 18 (expr -> ENTIER .)
-    OU              reduce using rule 18 (expr -> ENTIER .)
-    ET              reduce using rule 18 (expr -> ENTIER .)
-    DIFFERENT       reduce using rule 18 (expr -> ENTIER .)
-    EGAL            reduce using rule 18 (expr -> ENTIER .)
-    SUPERIEUR_OU_EGAL reduce using rule 18 (expr -> ENTIER .)
-    INFERIEUR_OU_EGAL reduce using rule 18 (expr -> ENTIER .)
-    SUPERIEUR       reduce using rule 18 (expr -> ENTIER .)
-    INFERIEUR       reduce using rule 18 (expr -> ENTIER .)
-    %               reduce using rule 18 (expr -> ENTIER .)
-    /               reduce using rule 18 (expr -> ENTIER .)
-    *               reduce using rule 18 (expr -> ENTIER .)
-    -               reduce using rule 18 (expr -> ENTIER .)
-    +               reduce using rule 18 (expr -> ENTIER .)
+    (15) expr -> NON . expr
+    (13) expr -> . FAUX
+    (14) expr -> . VRAI
+    (15) expr -> . NON expr
+    (16) expr -> . expr OU expr
+    (17) expr -> . expr ET expr
+    (18) expr -> . expr DIFFERENT expr
+    (19) expr -> . expr EGAL expr
+    (20) expr -> . expr SUPERIEUR_OU_EGAL expr
+    (21) expr -> . expr INFERIEUR_OU_EGAL expr
+    (22) expr -> . expr SUPERIEUR expr
+    (23) expr -> . expr INFERIEUR expr
+    (24) expr -> . ENTIER
+    (25) expr -> . ( expr )
+    (26) expr -> . expr % expr
+    (27) expr -> . expr / expr
+    (28) expr -> . expr * expr
+    (29) expr -> . expr - expr
+    (30) expr -> . expr + expr
+    FAUX            shift and go to state 14
+    VRAI            shift and go to state 15
+    NON             shift and go to state 16
+    ENTIER          shift and go to state 17
+    (               shift and go to state 12
 
+    expr                           shift and go to state 35
 
 state 17
 
-    (4) instruction -> IDENTIFIANT = LIRE ( . ) ;
-    )               shift and go to state 34
+    (24) expr -> ENTIER .
+    )               reduce using rule 24 (expr -> ENTIER .)
+    OU              reduce using rule 24 (expr -> ENTIER .)
+    ET              reduce using rule 24 (expr -> ENTIER .)
+    DIFFERENT       reduce using rule 24 (expr -> ENTIER .)
+    EGAL            reduce using rule 24 (expr -> ENTIER .)
+    SUPERIEUR_OU_EGAL reduce using rule 24 (expr -> ENTIER .)
+    INFERIEUR_OU_EGAL reduce using rule 24 (expr -> ENTIER .)
+    SUPERIEUR       reduce using rule 24 (expr -> ENTIER .)
+    INFERIEUR       reduce using rule 24 (expr -> ENTIER .)
+    %               reduce using rule 24 (expr -> ENTIER .)
+    /               reduce using rule 24 (expr -> ENTIER .)
+    *               reduce using rule 24 (expr -> ENTIER .)
+    -               reduce using rule 24 (expr -> ENTIER .)
+    +               reduce using rule 24 (expr -> ENTIER .)
 
 
 state 18
 
-    (19) expr -> ( expr . )
-    (10) expr -> expr . OU expr
-    (11) expr -> expr . ET expr
-    (12) expr -> expr . DIFFERENT expr
-    (13) expr -> expr . EGAL expr
-    (14) expr -> expr . SUPERIEUR_OU_EGAL expr
-    (15) expr -> expr . INFERIEUR_OU_EGAL expr
-    (16) expr -> expr . SUPERIEUR expr
-    (17) expr -> expr . INFERIEUR expr
-    (20) expr -> expr . % expr
-    (21) expr -> expr . / expr
-    (22) expr -> expr . * expr
-    (23) expr -> expr . - expr
-    (24) expr -> expr . + expr
-    )               shift and go to state 35
-    OU              shift and go to state 20
-    ET              shift and go to state 21
-    DIFFERENT       shift and go to state 22
-    EGAL            shift and go to state 23
-    SUPERIEUR_OU_EGAL shift and go to state 24
-    INFERIEUR_OU_EGAL shift and go to state 25
-    SUPERIEUR       shift and go to state 26
-    INFERIEUR       shift and go to state 27
-    %               shift and go to state 28
-    /               shift and go to state 29
-    *               shift and go to state 30
-    -               shift and go to state 31
-    +               shift and go to state 32
+    (10) instruction -> IDENTIFIANT = LIRE . ( ) ;
+    (               shift and go to state 36
 
 
 state 19
 
-    (6) ecrire -> ECRIRE ( expr ) . ;
-    ;               shift and go to state 36
+    (12) ecrire -> ECRIRE ( expr . ) ;
+    (16) expr -> expr . OU expr
+    (17) expr -> expr . ET expr
+    (18) expr -> expr . DIFFERENT expr
+    (19) expr -> expr . EGAL expr
+    (20) expr -> expr . SUPERIEUR_OU_EGAL expr
+    (21) expr -> expr . INFERIEUR_OU_EGAL expr
+    (22) expr -> expr . SUPERIEUR expr
+    (23) expr -> expr . INFERIEUR expr
+    (26) expr -> expr . % expr
+    (27) expr -> expr . / expr
+    (28) expr -> expr . * expr
+    (29) expr -> expr . - expr
+    (30) expr -> expr . + expr
+    )               shift and go to state 37
+    OU              shift and go to state 22
+    ET              shift and go to state 23
+    DIFFERENT       shift and go to state 24
+    EGAL            shift and go to state 25
+    SUPERIEUR_OU_EGAL shift and go to state 26
+    INFERIEUR_OU_EGAL shift and go to state 27
+    SUPERIEUR       shift and go to state 28
+    INFERIEUR       shift and go to state 29
+    %               shift and go to state 30
+    /               shift and go to state 31
+    *               shift and go to state 32
+    -               shift and go to state 33
+    +               shift and go to state 34
 
 
 state 20
 
-    (10) expr -> expr OU . expr
-    (7) expr -> . FAUX
-    (8) expr -> . VRAI
-    (9) expr -> . NON expr
-    (10) expr -> . expr OU expr
-    (11) expr -> . expr ET expr
-    (12) expr -> . expr DIFFERENT expr
-    (13) expr -> . expr EGAL expr
-    (14) expr -> . expr SUPERIEUR_OU_EGAL expr
-    (15) expr -> . expr INFERIEUR_OU_EGAL expr
-    (16) expr -> . expr SUPERIEUR expr
-    (17) expr -> . expr INFERIEUR expr
-    (18) expr -> . ENTIER
-    (19) expr -> . ( expr )
-    (20) expr -> . expr % expr
-    (21) expr -> . expr / expr
-    (22) expr -> . expr * expr
-    (23) expr -> . expr - expr
-    (24) expr -> . expr + expr
-    FAUX            shift and go to state 13
-    VRAI            shift and go to state 14
-    NON             shift and go to state 15
-    ENTIER          shift and go to state 16
-    (               shift and go to state 11
+    (25) expr -> ( expr . )
+    (16) expr -> expr . OU expr
+    (17) expr -> expr . ET expr
+    (18) expr -> expr . DIFFERENT expr
+    (19) expr -> expr . EGAL expr
+    (20) expr -> expr . SUPERIEUR_OU_EGAL expr
+    (21) expr -> expr . INFERIEUR_OU_EGAL expr
+    (22) expr -> expr . SUPERIEUR expr
+    (23) expr -> expr . INFERIEUR expr
+    (26) expr -> expr . % expr
+    (27) expr -> expr . / expr
+    (28) expr -> expr . * expr
+    (29) expr -> expr . - expr
+    (30) expr -> expr . + expr
+    )               shift and go to state 38
+    OU              shift and go to state 22
+    ET              shift and go to state 23
+    DIFFERENT       shift and go to state 24
+    EGAL            shift and go to state 25
+    SUPERIEUR_OU_EGAL shift and go to state 26
+    INFERIEUR_OU_EGAL shift and go to state 27
+    SUPERIEUR       shift and go to state 28
+    INFERIEUR       shift and go to state 29
+    %               shift and go to state 30
+    /               shift and go to state 31
+    *               shift and go to state 32
+    -               shift and go to state 33
+    +               shift and go to state 34
 
-    expr                           shift and go to state 37
 
 state 21
 
-    (11) expr -> expr ET . expr
-    (7) expr -> . FAUX
-    (8) expr -> . VRAI
-    (9) expr -> . NON expr
-    (10) expr -> . expr OU expr
-    (11) expr -> . expr ET expr
-    (12) expr -> . expr DIFFERENT expr
-    (13) expr -> . expr EGAL expr
-    (14) expr -> . expr SUPERIEUR_OU_EGAL expr
-    (15) expr -> . expr INFERIEUR_OU_EGAL expr
-    (16) expr -> . expr SUPERIEUR expr
-    (17) expr -> . expr INFERIEUR expr
-    (18) expr -> . ENTIER
-    (19) expr -> . ( expr )
-    (20) expr -> . expr % expr
-    (21) expr -> . expr / expr
-    (22) expr -> . expr * expr
-    (23) expr -> . expr - expr
-    (24) expr -> . expr + expr
-    FAUX            shift and go to state 13
-    VRAI            shift and go to state 14
-    NON             shift and go to state 15
-    ENTIER          shift and go to state 16
-    (               shift and go to state 11
+    (6) instruction -> SI ( expr ) . { listeInstructions } listeSinonsi SINON { listeInstructions }
+    (7) instruction -> SI ( expr ) . { listeInstructions } SINON { listeInstructions }
+    (8) instruction -> SI ( expr ) . { listeInstructions } listeSinonsi
+    (9) instruction -> SI ( expr ) . { listeInstructions }
+    {               shift and go to state 39
 
-    expr                           shift and go to state 38
 
 state 22
 
-    (12) expr -> expr DIFFERENT . expr
-    (7) expr -> . FAUX
-    (8) expr -> . VRAI
-    (9) expr -> . NON expr
-    (10) expr -> . expr OU expr
-    (11) expr -> . expr ET expr
-    (12) expr -> . expr DIFFERENT expr
-    (13) expr -> . expr EGAL expr
-    (14) expr -> . expr SUPERIEUR_OU_EGAL expr
-    (15) expr -> . expr INFERIEUR_OU_EGAL expr
-    (16) expr -> . expr SUPERIEUR expr
-    (17) expr -> . expr INFERIEUR expr
-    (18) expr -> . ENTIER
-    (19) expr -> . ( expr )
-    (20) expr -> . expr % expr
-    (21) expr -> . expr / expr
-    (22) expr -> . expr * expr
-    (23) expr -> . expr - expr
-    (24) expr -> . expr + expr
-    FAUX            shift and go to state 13
-    VRAI            shift and go to state 14
-    NON             shift and go to state 15
-    ENTIER          shift and go to state 16
-    (               shift and go to state 11
-
-    expr                           shift and go to state 39
-
-state 23
-
-    (13) expr -> expr EGAL . expr
-    (7) expr -> . FAUX
-    (8) expr -> . VRAI
-    (9) expr -> . NON expr
-    (10) expr -> . expr OU expr
-    (11) expr -> . expr ET expr
-    (12) expr -> . expr DIFFERENT expr
-    (13) expr -> . expr EGAL expr
-    (14) expr -> . expr SUPERIEUR_OU_EGAL expr
-    (15) expr -> . expr INFERIEUR_OU_EGAL expr
-    (16) expr -> . expr SUPERIEUR expr
-    (17) expr -> . expr INFERIEUR expr
-    (18) expr -> . ENTIER
-    (19) expr -> . ( expr )
-    (20) expr -> . expr % expr
-    (21) expr -> . expr / expr
-    (22) expr -> . expr * expr
-    (23) expr -> . expr - expr
-    (24) expr -> . expr + expr
-    FAUX            shift and go to state 13
-    VRAI            shift and go to state 14
-    NON             shift and go to state 15
-    ENTIER          shift and go to state 16
-    (               shift and go to state 11
+    (16) expr -> expr OU . expr
+    (13) expr -> . FAUX
+    (14) expr -> . VRAI
+    (15) expr -> . NON expr
+    (16) expr -> . expr OU expr
+    (17) expr -> . expr ET expr
+    (18) expr -> . expr DIFFERENT expr
+    (19) expr -> . expr EGAL expr
+    (20) expr -> . expr SUPERIEUR_OU_EGAL expr
+    (21) expr -> . expr INFERIEUR_OU_EGAL expr
+    (22) expr -> . expr SUPERIEUR expr
+    (23) expr -> . expr INFERIEUR expr
+    (24) expr -> . ENTIER
+    (25) expr -> . ( expr )
+    (26) expr -> . expr % expr
+    (27) expr -> . expr / expr
+    (28) expr -> . expr * expr
+    (29) expr -> . expr - expr
+    (30) expr -> . expr + expr
+    FAUX            shift and go to state 14
+    VRAI            shift and go to state 15
+    NON             shift and go to state 16
+    ENTIER          shift and go to state 17
+    (               shift and go to state 12
 
     expr                           shift and go to state 40
 
-state 24
+state 23
 
-    (14) expr -> expr SUPERIEUR_OU_EGAL . expr
-    (7) expr -> . FAUX
-    (8) expr -> . VRAI
-    (9) expr -> . NON expr
-    (10) expr -> . expr OU expr
-    (11) expr -> . expr ET expr
-    (12) expr -> . expr DIFFERENT expr
-    (13) expr -> . expr EGAL expr
-    (14) expr -> . expr SUPERIEUR_OU_EGAL expr
-    (15) expr -> . expr INFERIEUR_OU_EGAL expr
-    (16) expr -> . expr SUPERIEUR expr
-    (17) expr -> . expr INFERIEUR expr
-    (18) expr -> . ENTIER
-    (19) expr -> . ( expr )
-    (20) expr -> . expr % expr
-    (21) expr -> . expr / expr
-    (22) expr -> . expr * expr
-    (23) expr -> . expr - expr
-    (24) expr -> . expr + expr
-    FAUX            shift and go to state 13
-    VRAI            shift and go to state 14
-    NON             shift and go to state 15
-    ENTIER          shift and go to state 16
-    (               shift and go to state 11
+    (17) expr -> expr ET . expr
+    (13) expr -> . FAUX
+    (14) expr -> . VRAI
+    (15) expr -> . NON expr
+    (16) expr -> . expr OU expr
+    (17) expr -> . expr ET expr
+    (18) expr -> . expr DIFFERENT expr
+    (19) expr -> . expr EGAL expr
+    (20) expr -> . expr SUPERIEUR_OU_EGAL expr
+    (21) expr -> . expr INFERIEUR_OU_EGAL expr
+    (22) expr -> . expr SUPERIEUR expr
+    (23) expr -> . expr INFERIEUR expr
+    (24) expr -> . ENTIER
+    (25) expr -> . ( expr )
+    (26) expr -> . expr % expr
+    (27) expr -> . expr / expr
+    (28) expr -> . expr * expr
+    (29) expr -> . expr - expr
+    (30) expr -> . expr + expr
+    FAUX            shift and go to state 14
+    VRAI            shift and go to state 15
+    NON             shift and go to state 16
+    ENTIER          shift and go to state 17
+    (               shift and go to state 12
 
     expr                           shift and go to state 41
 
-state 25
+state 24
 
-    (15) expr -> expr INFERIEUR_OU_EGAL . expr
-    (7) expr -> . FAUX
-    (8) expr -> . VRAI
-    (9) expr -> . NON expr
-    (10) expr -> . expr OU expr
-    (11) expr -> . expr ET expr
-    (12) expr -> . expr DIFFERENT expr
-    (13) expr -> . expr EGAL expr
-    (14) expr -> . expr SUPERIEUR_OU_EGAL expr
-    (15) expr -> . expr INFERIEUR_OU_EGAL expr
-    (16) expr -> . expr SUPERIEUR expr
-    (17) expr -> . expr INFERIEUR expr
-    (18) expr -> . ENTIER
-    (19) expr -> . ( expr )
-    (20) expr -> . expr % expr
-    (21) expr -> . expr / expr
-    (22) expr -> . expr * expr
-    (23) expr -> . expr - expr
-    (24) expr -> . expr + expr
-    FAUX            shift and go to state 13
-    VRAI            shift and go to state 14
-    NON             shift and go to state 15
-    ENTIER          shift and go to state 16
-    (               shift and go to state 11
+    (18) expr -> expr DIFFERENT . expr
+    (13) expr -> . FAUX
+    (14) expr -> . VRAI
+    (15) expr -> . NON expr
+    (16) expr -> . expr OU expr
+    (17) expr -> . expr ET expr
+    (18) expr -> . expr DIFFERENT expr
+    (19) expr -> . expr EGAL expr
+    (20) expr -> . expr SUPERIEUR_OU_EGAL expr
+    (21) expr -> . expr INFERIEUR_OU_EGAL expr
+    (22) expr -> . expr SUPERIEUR expr
+    (23) expr -> . expr INFERIEUR expr
+    (24) expr -> . ENTIER
+    (25) expr -> . ( expr )
+    (26) expr -> . expr % expr
+    (27) expr -> . expr / expr
+    (28) expr -> . expr * expr
+    (29) expr -> . expr - expr
+    (30) expr -> . expr + expr
+    FAUX            shift and go to state 14
+    VRAI            shift and go to state 15
+    NON             shift and go to state 16
+    ENTIER          shift and go to state 17
+    (               shift and go to state 12
 
     expr                           shift and go to state 42
 
-state 26
+state 25
 
-    (16) expr -> expr SUPERIEUR . expr
-    (7) expr -> . FAUX
-    (8) expr -> . VRAI
-    (9) expr -> . NON expr
-    (10) expr -> . expr OU expr
-    (11) expr -> . expr ET expr
-    (12) expr -> . expr DIFFERENT expr
-    (13) expr -> . expr EGAL expr
-    (14) expr -> . expr SUPERIEUR_OU_EGAL expr
-    (15) expr -> . expr INFERIEUR_OU_EGAL expr
-    (16) expr -> . expr SUPERIEUR expr
-    (17) expr -> . expr INFERIEUR expr
-    (18) expr -> . ENTIER
-    (19) expr -> . ( expr )
-    (20) expr -> . expr % expr
-    (21) expr -> . expr / expr
-    (22) expr -> . expr * expr
-    (23) expr -> . expr - expr
-    (24) expr -> . expr + expr
-    FAUX            shift and go to state 13
-    VRAI            shift and go to state 14
-    NON             shift and go to state 15
-    ENTIER          shift and go to state 16
-    (               shift and go to state 11
+    (19) expr -> expr EGAL . expr
+    (13) expr -> . FAUX
+    (14) expr -> . VRAI
+    (15) expr -> . NON expr
+    (16) expr -> . expr OU expr
+    (17) expr -> . expr ET expr
+    (18) expr -> . expr DIFFERENT expr
+    (19) expr -> . expr EGAL expr
+    (20) expr -> . expr SUPERIEUR_OU_EGAL expr
+    (21) expr -> . expr INFERIEUR_OU_EGAL expr
+    (22) expr -> . expr SUPERIEUR expr
+    (23) expr -> . expr INFERIEUR expr
+    (24) expr -> . ENTIER
+    (25) expr -> . ( expr )
+    (26) expr -> . expr % expr
+    (27) expr -> . expr / expr
+    (28) expr -> . expr * expr
+    (29) expr -> . expr - expr
+    (30) expr -> . expr + expr
+    FAUX            shift and go to state 14
+    VRAI            shift and go to state 15
+    NON             shift and go to state 16
+    ENTIER          shift and go to state 17
+    (               shift and go to state 12
 
     expr                           shift and go to state 43
 
-state 27
+state 26
 
-    (17) expr -> expr INFERIEUR . expr
-    (7) expr -> . FAUX
-    (8) expr -> . VRAI
-    (9) expr -> . NON expr
-    (10) expr -> . expr OU expr
-    (11) expr -> . expr ET expr
-    (12) expr -> . expr DIFFERENT expr
-    (13) expr -> . expr EGAL expr
-    (14) expr -> . expr SUPERIEUR_OU_EGAL expr
-    (15) expr -> . expr INFERIEUR_OU_EGAL expr
-    (16) expr -> . expr SUPERIEUR expr
-    (17) expr -> . expr INFERIEUR expr
-    (18) expr -> . ENTIER
-    (19) expr -> . ( expr )
-    (20) expr -> . expr % expr
-    (21) expr -> . expr / expr
-    (22) expr -> . expr * expr
-    (23) expr -> . expr - expr
-    (24) expr -> . expr + expr
-    FAUX            shift and go to state 13
-    VRAI            shift and go to state 14
-    NON             shift and go to state 15
-    ENTIER          shift and go to state 16
-    (               shift and go to state 11
+    (20) expr -> expr SUPERIEUR_OU_EGAL . expr
+    (13) expr -> . FAUX
+    (14) expr -> . VRAI
+    (15) expr -> . NON expr
+    (16) expr -> . expr OU expr
+    (17) expr -> . expr ET expr
+    (18) expr -> . expr DIFFERENT expr
+    (19) expr -> . expr EGAL expr
+    (20) expr -> . expr SUPERIEUR_OU_EGAL expr
+    (21) expr -> . expr INFERIEUR_OU_EGAL expr
+    (22) expr -> . expr SUPERIEUR expr
+    (23) expr -> . expr INFERIEUR expr
+    (24) expr -> . ENTIER
+    (25) expr -> . ( expr )
+    (26) expr -> . expr % expr
+    (27) expr -> . expr / expr
+    (28) expr -> . expr * expr
+    (29) expr -> . expr - expr
+    (30) expr -> . expr + expr
+    FAUX            shift and go to state 14
+    VRAI            shift and go to state 15
+    NON             shift and go to state 16
+    ENTIER          shift and go to state 17
+    (               shift and go to state 12
 
     expr                           shift and go to state 44
 
-state 28
+state 27
 
-    (20) expr -> expr % . expr
-    (7) expr -> . FAUX
-    (8) expr -> . VRAI
-    (9) expr -> . NON expr
-    (10) expr -> . expr OU expr
-    (11) expr -> . expr ET expr
-    (12) expr -> . expr DIFFERENT expr
-    (13) expr -> . expr EGAL expr
-    (14) expr -> . expr SUPERIEUR_OU_EGAL expr
-    (15) expr -> . expr INFERIEUR_OU_EGAL expr
-    (16) expr -> . expr SUPERIEUR expr
-    (17) expr -> . expr INFERIEUR expr
-    (18) expr -> . ENTIER
-    (19) expr -> . ( expr )
-    (20) expr -> . expr % expr
-    (21) expr -> . expr / expr
-    (22) expr -> . expr * expr
-    (23) expr -> . expr - expr
-    (24) expr -> . expr + expr
-    FAUX            shift and go to state 13
-    VRAI            shift and go to state 14
-    NON             shift and go to state 15
-    ENTIER          shift and go to state 16
-    (               shift and go to state 11
+    (21) expr -> expr INFERIEUR_OU_EGAL . expr
+    (13) expr -> . FAUX
+    (14) expr -> . VRAI
+    (15) expr -> . NON expr
+    (16) expr -> . expr OU expr
+    (17) expr -> . expr ET expr
+    (18) expr -> . expr DIFFERENT expr
+    (19) expr -> . expr EGAL expr
+    (20) expr -> . expr SUPERIEUR_OU_EGAL expr
+    (21) expr -> . expr INFERIEUR_OU_EGAL expr
+    (22) expr -> . expr SUPERIEUR expr
+    (23) expr -> . expr INFERIEUR expr
+    (24) expr -> . ENTIER
+    (25) expr -> . ( expr )
+    (26) expr -> . expr % expr
+    (27) expr -> . expr / expr
+    (28) expr -> . expr * expr
+    (29) expr -> . expr - expr
+    (30) expr -> . expr + expr
+    FAUX            shift and go to state 14
+    VRAI            shift and go to state 15
+    NON             shift and go to state 16
+    ENTIER          shift and go to state 17
+    (               shift and go to state 12
 
     expr                           shift and go to state 45
 
-state 29
+state 28
 
-    (21) expr -> expr / . expr
-    (7) expr -> . FAUX
-    (8) expr -> . VRAI
-    (9) expr -> . NON expr
-    (10) expr -> . expr OU expr
-    (11) expr -> . expr ET expr
-    (12) expr -> . expr DIFFERENT expr
-    (13) expr -> . expr EGAL expr
-    (14) expr -> . expr SUPERIEUR_OU_EGAL expr
-    (15) expr -> . expr INFERIEUR_OU_EGAL expr
-    (16) expr -> . expr SUPERIEUR expr
-    (17) expr -> . expr INFERIEUR expr
-    (18) expr -> . ENTIER
-    (19) expr -> . ( expr )
-    (20) expr -> . expr % expr
-    (21) expr -> . expr / expr
-    (22) expr -> . expr * expr
-    (23) expr -> . expr - expr
-    (24) expr -> . expr + expr
-    FAUX            shift and go to state 13
-    VRAI            shift and go to state 14
-    NON             shift and go to state 15
-    ENTIER          shift and go to state 16
-    (               shift and go to state 11
+    (22) expr -> expr SUPERIEUR . expr
+    (13) expr -> . FAUX
+    (14) expr -> . VRAI
+    (15) expr -> . NON expr
+    (16) expr -> . expr OU expr
+    (17) expr -> . expr ET expr
+    (18) expr -> . expr DIFFERENT expr
+    (19) expr -> . expr EGAL expr
+    (20) expr -> . expr SUPERIEUR_OU_EGAL expr
+    (21) expr -> . expr INFERIEUR_OU_EGAL expr
+    (22) expr -> . expr SUPERIEUR expr
+    (23) expr -> . expr INFERIEUR expr
+    (24) expr -> . ENTIER
+    (25) expr -> . ( expr )
+    (26) expr -> . expr % expr
+    (27) expr -> . expr / expr
+    (28) expr -> . expr * expr
+    (29) expr -> . expr - expr
+    (30) expr -> . expr + expr
+    FAUX            shift and go to state 14
+    VRAI            shift and go to state 15
+    NON             shift and go to state 16
+    ENTIER          shift and go to state 17
+    (               shift and go to state 12
 
     expr                           shift and go to state 46
 
-state 30
+state 29
 
-    (22) expr -> expr * . expr
-    (7) expr -> . FAUX
-    (8) expr -> . VRAI
-    (9) expr -> . NON expr
-    (10) expr -> . expr OU expr
-    (11) expr -> . expr ET expr
-    (12) expr -> . expr DIFFERENT expr
-    (13) expr -> . expr EGAL expr
-    (14) expr -> . expr SUPERIEUR_OU_EGAL expr
-    (15) expr -> . expr INFERIEUR_OU_EGAL expr
-    (16) expr -> . expr SUPERIEUR expr
-    (17) expr -> . expr INFERIEUR expr
-    (18) expr -> . ENTIER
-    (19) expr -> . ( expr )
-    (20) expr -> . expr % expr
-    (21) expr -> . expr / expr
-    (22) expr -> . expr * expr
-    (23) expr -> . expr - expr
-    (24) expr -> . expr + expr
-    FAUX            shift and go to state 13
-    VRAI            shift and go to state 14
-    NON             shift and go to state 15
-    ENTIER          shift and go to state 16
-    (               shift and go to state 11
+    (23) expr -> expr INFERIEUR . expr
+    (13) expr -> . FAUX
+    (14) expr -> . VRAI
+    (15) expr -> . NON expr
+    (16) expr -> . expr OU expr
+    (17) expr -> . expr ET expr
+    (18) expr -> . expr DIFFERENT expr
+    (19) expr -> . expr EGAL expr
+    (20) expr -> . expr SUPERIEUR_OU_EGAL expr
+    (21) expr -> . expr INFERIEUR_OU_EGAL expr
+    (22) expr -> . expr SUPERIEUR expr
+    (23) expr -> . expr INFERIEUR expr
+    (24) expr -> . ENTIER
+    (25) expr -> . ( expr )
+    (26) expr -> . expr % expr
+    (27) expr -> . expr / expr
+    (28) expr -> . expr * expr
+    (29) expr -> . expr - expr
+    (30) expr -> . expr + expr
+    FAUX            shift and go to state 14
+    VRAI            shift and go to state 15
+    NON             shift and go to state 16
+    ENTIER          shift and go to state 17
+    (               shift and go to state 12
 
     expr                           shift and go to state 47
 
-state 31
+state 30
 
-    (23) expr -> expr - . expr
-    (7) expr -> . FAUX
-    (8) expr -> . VRAI
-    (9) expr -> . NON expr
-    (10) expr -> . expr OU expr
-    (11) expr -> . expr ET expr
-    (12) expr -> . expr DIFFERENT expr
-    (13) expr -> . expr EGAL expr
-    (14) expr -> . expr SUPERIEUR_OU_EGAL expr
-    (15) expr -> . expr INFERIEUR_OU_EGAL expr
-    (16) expr -> . expr SUPERIEUR expr
-    (17) expr -> . expr INFERIEUR expr
-    (18) expr -> . ENTIER
-    (19) expr -> . ( expr )
-    (20) expr -> . expr % expr
-    (21) expr -> . expr / expr
-    (22) expr -> . expr * expr
-    (23) expr -> . expr - expr
-    (24) expr -> . expr + expr
-    FAUX            shift and go to state 13
-    VRAI            shift and go to state 14
-    NON             shift and go to state 15
-    ENTIER          shift and go to state 16
-    (               shift and go to state 11
+    (26) expr -> expr % . expr
+    (13) expr -> . FAUX
+    (14) expr -> . VRAI
+    (15) expr -> . NON expr
+    (16) expr -> . expr OU expr
+    (17) expr -> . expr ET expr
+    (18) expr -> . expr DIFFERENT expr
+    (19) expr -> . expr EGAL expr
+    (20) expr -> . expr SUPERIEUR_OU_EGAL expr
+    (21) expr -> . expr INFERIEUR_OU_EGAL expr
+    (22) expr -> . expr SUPERIEUR expr
+    (23) expr -> . expr INFERIEUR expr
+    (24) expr -> . ENTIER
+    (25) expr -> . ( expr )
+    (26) expr -> . expr % expr
+    (27) expr -> . expr / expr
+    (28) expr -> . expr * expr
+    (29) expr -> . expr - expr
+    (30) expr -> . expr + expr
+    FAUX            shift and go to state 14
+    VRAI            shift and go to state 15
+    NON             shift and go to state 16
+    ENTIER          shift and go to state 17
+    (               shift and go to state 12
 
     expr                           shift and go to state 48
 
-state 32
+state 31
 
-    (24) expr -> expr + . expr
-    (7) expr -> . FAUX
-    (8) expr -> . VRAI
-    (9) expr -> . NON expr
-    (10) expr -> . expr OU expr
-    (11) expr -> . expr ET expr
-    (12) expr -> . expr DIFFERENT expr
-    (13) expr -> . expr EGAL expr
-    (14) expr -> . expr SUPERIEUR_OU_EGAL expr
-    (15) expr -> . expr INFERIEUR_OU_EGAL expr
-    (16) expr -> . expr SUPERIEUR expr
-    (17) expr -> . expr INFERIEUR expr
-    (18) expr -> . ENTIER
-    (19) expr -> . ( expr )
-    (20) expr -> . expr % expr
-    (21) expr -> . expr / expr
-    (22) expr -> . expr * expr
-    (23) expr -> . expr - expr
-    (24) expr -> . expr + expr
-    FAUX            shift and go to state 13
-    VRAI            shift and go to state 14
-    NON             shift and go to state 15
-    ENTIER          shift and go to state 16
-    (               shift and go to state 11
+    (27) expr -> expr / . expr
+    (13) expr -> . FAUX
+    (14) expr -> . VRAI
+    (15) expr -> . NON expr
+    (16) expr -> . expr OU expr
+    (17) expr -> . expr ET expr
+    (18) expr -> . expr DIFFERENT expr
+    (19) expr -> . expr EGAL expr
+    (20) expr -> . expr SUPERIEUR_OU_EGAL expr
+    (21) expr -> . expr INFERIEUR_OU_EGAL expr
+    (22) expr -> . expr SUPERIEUR expr
+    (23) expr -> . expr INFERIEUR expr
+    (24) expr -> . ENTIER
+    (25) expr -> . ( expr )
+    (26) expr -> . expr % expr
+    (27) expr -> . expr / expr
+    (28) expr -> . expr * expr
+    (29) expr -> . expr - expr
+    (30) expr -> . expr + expr
+    FAUX            shift and go to state 14
+    VRAI            shift and go to state 15
+    NON             shift and go to state 16
+    ENTIER          shift and go to state 17
+    (               shift and go to state 12
 
     expr                           shift and go to state 49
 
+state 32
+
+    (28) expr -> expr * . expr
+    (13) expr -> . FAUX
+    (14) expr -> . VRAI
+    (15) expr -> . NON expr
+    (16) expr -> . expr OU expr
+    (17) expr -> . expr ET expr
+    (18) expr -> . expr DIFFERENT expr
+    (19) expr -> . expr EGAL expr
+    (20) expr -> . expr SUPERIEUR_OU_EGAL expr
+    (21) expr -> . expr INFERIEUR_OU_EGAL expr
+    (22) expr -> . expr SUPERIEUR expr
+    (23) expr -> . expr INFERIEUR expr
+    (24) expr -> . ENTIER
+    (25) expr -> . ( expr )
+    (26) expr -> . expr % expr
+    (27) expr -> . expr / expr
+    (28) expr -> . expr * expr
+    (29) expr -> . expr - expr
+    (30) expr -> . expr + expr
+    FAUX            shift and go to state 14
+    VRAI            shift and go to state 15
+    NON             shift and go to state 16
+    ENTIER          shift and go to state 17
+    (               shift and go to state 12
+
+    expr                           shift and go to state 50
+
 state 33
 
-    (9) expr -> NON expr .
-    (10) expr -> expr . OU expr
-    (11) expr -> expr . ET expr
-    (12) expr -> expr . DIFFERENT expr
-    (13) expr -> expr . EGAL expr
-    (14) expr -> expr . SUPERIEUR_OU_EGAL expr
-    (15) expr -> expr . INFERIEUR_OU_EGAL expr
-    (16) expr -> expr . SUPERIEUR expr
-    (17) expr -> expr . INFERIEUR expr
-    (20) expr -> expr . % expr
-    (21) expr -> expr . / expr
-    (22) expr -> expr . * expr
-    (23) expr -> expr . - expr
-    (24) expr -> expr . + expr
-    )               reduce using rule 9 (expr -> NON expr .)
-    OU              reduce using rule 9 (expr -> NON expr .)
-    ET              reduce using rule 9 (expr -> NON expr .)
-    DIFFERENT       shift and go to state 22
-    EGAL            shift and go to state 23
-    SUPERIEUR_OU_EGAL shift and go to state 24
-    INFERIEUR_OU_EGAL shift and go to state 25
-    SUPERIEUR       shift and go to state 26
-    INFERIEUR       shift and go to state 27
-    %               shift and go to state 28
-    /               shift and go to state 29
-    *               shift and go to state 30
-    -               shift and go to state 31
-    +               shift and go to state 32
+    (29) expr -> expr - . expr
+    (13) expr -> . FAUX
+    (14) expr -> . VRAI
+    (15) expr -> . NON expr
+    (16) expr -> . expr OU expr
+    (17) expr -> . expr ET expr
+    (18) expr -> . expr DIFFERENT expr
+    (19) expr -> . expr EGAL expr
+    (20) expr -> . expr SUPERIEUR_OU_EGAL expr
+    (21) expr -> . expr INFERIEUR_OU_EGAL expr
+    (22) expr -> . expr SUPERIEUR expr
+    (23) expr -> . expr INFERIEUR expr
+    (24) expr -> . ENTIER
+    (25) expr -> . ( expr )
+    (26) expr -> . expr % expr
+    (27) expr -> . expr / expr
+    (28) expr -> . expr * expr
+    (29) expr -> . expr - expr
+    (30) expr -> . expr + expr
+    FAUX            shift and go to state 14
+    VRAI            shift and go to state 15
+    NON             shift and go to state 16
+    ENTIER          shift and go to state 17
+    (               shift and go to state 12
 
+    expr                           shift and go to state 51
 
 state 34
 
-    (4) instruction -> IDENTIFIANT = LIRE ( ) . ;
-    ;               shift and go to state 50
+    (30) expr -> expr + . expr
+    (13) expr -> . FAUX
+    (14) expr -> . VRAI
+    (15) expr -> . NON expr
+    (16) expr -> . expr OU expr
+    (17) expr -> . expr ET expr
+    (18) expr -> . expr DIFFERENT expr
+    (19) expr -> . expr EGAL expr
+    (20) expr -> . expr SUPERIEUR_OU_EGAL expr
+    (21) expr -> . expr INFERIEUR_OU_EGAL expr
+    (22) expr -> . expr SUPERIEUR expr
+    (23) expr -> . expr INFERIEUR expr
+    (24) expr -> . ENTIER
+    (25) expr -> . ( expr )
+    (26) expr -> . expr % expr
+    (27) expr -> . expr / expr
+    (28) expr -> . expr * expr
+    (29) expr -> . expr - expr
+    (30) expr -> . expr + expr
+    FAUX            shift and go to state 14
+    VRAI            shift and go to state 15
+    NON             shift and go to state 16
+    ENTIER          shift and go to state 17
+    (               shift and go to state 12
 
+    expr                           shift and go to state 52
 
 state 35
 
-    (19) expr -> ( expr ) .
-    )               reduce using rule 19 (expr -> ( expr ) .)
-    OU              reduce using rule 19 (expr -> ( expr ) .)
-    ET              reduce using rule 19 (expr -> ( expr ) .)
-    DIFFERENT       reduce using rule 19 (expr -> ( expr ) .)
-    EGAL            reduce using rule 19 (expr -> ( expr ) .)
-    SUPERIEUR_OU_EGAL reduce using rule 19 (expr -> ( expr ) .)
-    INFERIEUR_OU_EGAL reduce using rule 19 (expr -> ( expr ) .)
-    SUPERIEUR       reduce using rule 19 (expr -> ( expr ) .)
-    INFERIEUR       reduce using rule 19 (expr -> ( expr ) .)
-    %               reduce using rule 19 (expr -> ( expr ) .)
-    /               reduce using rule 19 (expr -> ( expr ) .)
-    *               reduce using rule 19 (expr -> ( expr ) .)
-    -               reduce using rule 19 (expr -> ( expr ) .)
-    +               reduce using rule 19 (expr -> ( expr ) .)
+    (15) expr -> NON expr .
+    (16) expr -> expr . OU expr
+    (17) expr -> expr . ET expr
+    (18) expr -> expr . DIFFERENT expr
+    (19) expr -> expr . EGAL expr
+    (20) expr -> expr . SUPERIEUR_OU_EGAL expr
+    (21) expr -> expr . INFERIEUR_OU_EGAL expr
+    (22) expr -> expr . SUPERIEUR expr
+    (23) expr -> expr . INFERIEUR expr
+    (26) expr -> expr . % expr
+    (27) expr -> expr . / expr
+    (28) expr -> expr . * expr
+    (29) expr -> expr . - expr
+    (30) expr -> expr . + expr
+    )               reduce using rule 15 (expr -> NON expr .)
+    OU              reduce using rule 15 (expr -> NON expr .)
+    ET              reduce using rule 15 (expr -> NON expr .)
+    DIFFERENT       shift and go to state 24
+    EGAL            shift and go to state 25
+    SUPERIEUR_OU_EGAL shift and go to state 26
+    INFERIEUR_OU_EGAL shift and go to state 27
+    SUPERIEUR       shift and go to state 28
+    INFERIEUR       shift and go to state 29
+    %               shift and go to state 30
+    /               shift and go to state 31
+    *               shift and go to state 32
+    -               shift and go to state 33
+    +               shift and go to state 34
 
 
 state 36
 
-    (6) ecrire -> ECRIRE ( expr ) ; .
-    IDENTIFIANT     reduce using rule 6 (ecrire -> ECRIRE ( expr ) ; .)
-    ECRIRE          reduce using rule 6 (ecrire -> ECRIRE ( expr ) ; .)
-    $end            reduce using rule 6 (ecrire -> ECRIRE ( expr ) ; .)
+    (10) instruction -> IDENTIFIANT = LIRE ( . ) ;
+    )               shift and go to state 53
 
 
 state 37
 
-    (10) expr -> expr OU expr .
-    (10) expr -> expr . OU expr
-    (11) expr -> expr . ET expr
-    (12) expr -> expr . DIFFERENT expr
-    (13) expr -> expr . EGAL expr
-    (14) expr -> expr . SUPERIEUR_OU_EGAL expr
-    (15) expr -> expr . INFERIEUR_OU_EGAL expr
-    (16) expr -> expr . SUPERIEUR expr
-    (17) expr -> expr . INFERIEUR expr
-    (20) expr -> expr . % expr
-    (21) expr -> expr . / expr
-    (22) expr -> expr . * expr
-    (23) expr -> expr . - expr
-    (24) expr -> expr . + expr
-    )               reduce using rule 10 (expr -> expr OU expr .)
-    OU              reduce using rule 10 (expr -> expr OU expr .)
-    ET              reduce using rule 10 (expr -> expr OU expr .)
-    DIFFERENT       shift and go to state 22
-    EGAL            shift and go to state 23
-    SUPERIEUR_OU_EGAL shift and go to state 24
-    INFERIEUR_OU_EGAL shift and go to state 25
-    SUPERIEUR       shift and go to state 26
-    INFERIEUR       shift and go to state 27
-    %               shift and go to state 28
-    /               shift and go to state 29
-    *               shift and go to state 30
-    -               shift and go to state 31
-    +               shift and go to state 32
+    (12) ecrire -> ECRIRE ( expr ) . ;
+    ;               shift and go to state 54
 
 
 state 38
 
-    (11) expr -> expr ET expr .
-    (10) expr -> expr . OU expr
-    (11) expr -> expr . ET expr
-    (12) expr -> expr . DIFFERENT expr
-    (13) expr -> expr . EGAL expr
-    (14) expr -> expr . SUPERIEUR_OU_EGAL expr
-    (15) expr -> expr . INFERIEUR_OU_EGAL expr
-    (16) expr -> expr . SUPERIEUR expr
-    (17) expr -> expr . INFERIEUR expr
-    (20) expr -> expr . % expr
-    (21) expr -> expr . / expr
-    (22) expr -> expr . * expr
-    (23) expr -> expr . - expr
-    (24) expr -> expr . + expr
-    )               reduce using rule 11 (expr -> expr ET expr .)
-    OU              reduce using rule 11 (expr -> expr ET expr .)
-    ET              reduce using rule 11 (expr -> expr ET expr .)
-    DIFFERENT       shift and go to state 22
-    EGAL            shift and go to state 23
-    SUPERIEUR_OU_EGAL shift and go to state 24
-    INFERIEUR_OU_EGAL shift and go to state 25
-    SUPERIEUR       shift and go to state 26
-    INFERIEUR       shift and go to state 27
-    %               shift and go to state 28
-    /               shift and go to state 29
-    *               shift and go to state 30
-    -               shift and go to state 31
-    +               shift and go to state 32
+    (25) expr -> ( expr ) .
+    )               reduce using rule 25 (expr -> ( expr ) .)
+    OU              reduce using rule 25 (expr -> ( expr ) .)
+    ET              reduce using rule 25 (expr -> ( expr ) .)
+    DIFFERENT       reduce using rule 25 (expr -> ( expr ) .)
+    EGAL            reduce using rule 25 (expr -> ( expr ) .)
+    SUPERIEUR_OU_EGAL reduce using rule 25 (expr -> ( expr ) .)
+    INFERIEUR_OU_EGAL reduce using rule 25 (expr -> ( expr ) .)
+    SUPERIEUR       reduce using rule 25 (expr -> ( expr ) .)
+    INFERIEUR       reduce using rule 25 (expr -> ( expr ) .)
+    %               reduce using rule 25 (expr -> ( expr ) .)
+    /               reduce using rule 25 (expr -> ( expr ) .)
+    *               reduce using rule 25 (expr -> ( expr ) .)
+    -               reduce using rule 25 (expr -> ( expr ) .)
+    +               reduce using rule 25 (expr -> ( expr ) .)
 
 
 state 39
 
-    (12) expr -> expr DIFFERENT expr .
-    (10) expr -> expr . OU expr
-    (11) expr -> expr . ET expr
-    (12) expr -> expr . DIFFERENT expr
-    (13) expr -> expr . EGAL expr
-    (14) expr -> expr . SUPERIEUR_OU_EGAL expr
-    (15) expr -> expr . INFERIEUR_OU_EGAL expr
-    (16) expr -> expr . SUPERIEUR expr
-    (17) expr -> expr . INFERIEUR expr
-    (20) expr -> expr . % expr
-    (21) expr -> expr . / expr
-    (22) expr -> expr . * expr
-    (23) expr -> expr . - expr
-    (24) expr -> expr . + expr
-    )               reduce using rule 12 (expr -> expr DIFFERENT expr .)
-    OU              reduce using rule 12 (expr -> expr DIFFERENT expr .)
-    ET              reduce using rule 12 (expr -> expr DIFFERENT expr .)
-    DIFFERENT       reduce using rule 12 (expr -> expr DIFFERENT expr .)
-    EGAL            reduce using rule 12 (expr -> expr DIFFERENT expr .)
-    SUPERIEUR_OU_EGAL reduce using rule 12 (expr -> expr DIFFERENT expr .)
-    INFERIEUR_OU_EGAL reduce using rule 12 (expr -> expr DIFFERENT expr .)
-    SUPERIEUR       reduce using rule 12 (expr -> expr DIFFERENT expr .)
-    INFERIEUR       reduce using rule 12 (expr -> expr DIFFERENT expr .)
-    %               shift and go to state 28
-    /               shift and go to state 29
-    *               shift and go to state 30
-    -               shift and go to state 31
-    +               shift and go to state 32
+    (6) instruction -> SI ( expr ) { . listeInstructions } listeSinonsi SINON { listeInstructions }
+    (7) instruction -> SI ( expr ) { . listeInstructions } SINON { listeInstructions }
+    (8) instruction -> SI ( expr ) { . listeInstructions } listeSinonsi
+    (9) instruction -> SI ( expr ) { . listeInstructions }
+    (2) listeInstructions -> . instruction listeInstructions
+    (3) listeInstructions -> . instruction
+    (6) instruction -> . SI ( expr ) { listeInstructions } listeSinonsi SINON { listeInstructions }
+    (7) instruction -> . SI ( expr ) { listeInstructions } SINON { listeInstructions }
+    (8) instruction -> . SI ( expr ) { listeInstructions } listeSinonsi
+    (9) instruction -> . SI ( expr ) { listeInstructions }
+    (10) instruction -> . IDENTIFIANT = LIRE ( ) ;
+    (11) instruction -> . ecrire
+    (12) ecrire -> . ECRIRE ( expr ) ;
+    SI              shift and go to state 4
+    IDENTIFIANT     shift and go to state 5
+    ECRIRE          shift and go to state 7
 
+    listeInstructions              shift and go to state 55
+    instruction                    shift and go to state 3
+    ecrire                         shift and go to state 6
 
 state 40
 
-    (13) expr -> expr EGAL expr .
-    (10) expr -> expr . OU expr
-    (11) expr -> expr . ET expr
-    (12) expr -> expr . DIFFERENT expr
-    (13) expr -> expr . EGAL expr
-    (14) expr -> expr . SUPERIEUR_OU_EGAL expr
-    (15) expr -> expr . INFERIEUR_OU_EGAL expr
-    (16) expr -> expr . SUPERIEUR expr
-    (17) expr -> expr . INFERIEUR expr
-    (20) expr -> expr . % expr
-    (21) expr -> expr . / expr
-    (22) expr -> expr . * expr
-    (23) expr -> expr . - expr
-    (24) expr -> expr . + expr
-    )               reduce using rule 13 (expr -> expr EGAL expr .)
-    OU              reduce using rule 13 (expr -> expr EGAL expr .)
-    ET              reduce using rule 13 (expr -> expr EGAL expr .)
-    DIFFERENT       reduce using rule 13 (expr -> expr EGAL expr .)
-    EGAL            reduce using rule 13 (expr -> expr EGAL expr .)
-    SUPERIEUR_OU_EGAL reduce using rule 13 (expr -> expr EGAL expr .)
-    INFERIEUR_OU_EGAL reduce using rule 13 (expr -> expr EGAL expr .)
-    SUPERIEUR       reduce using rule 13 (expr -> expr EGAL expr .)
-    INFERIEUR       reduce using rule 13 (expr -> expr EGAL expr .)
-    %               shift and go to state 28
-    /               shift and go to state 29
-    *               shift and go to state 30
-    -               shift and go to state 31
-    +               shift and go to state 32
+    (16) expr -> expr OU expr .
+    (16) expr -> expr . OU expr
+    (17) expr -> expr . ET expr
+    (18) expr -> expr . DIFFERENT expr
+    (19) expr -> expr . EGAL expr
+    (20) expr -> expr . SUPERIEUR_OU_EGAL expr
+    (21) expr -> expr . INFERIEUR_OU_EGAL expr
+    (22) expr -> expr . SUPERIEUR expr
+    (23) expr -> expr . INFERIEUR expr
+    (26) expr -> expr . % expr
+    (27) expr -> expr . / expr
+    (28) expr -> expr . * expr
+    (29) expr -> expr . - expr
+    (30) expr -> expr . + expr
+    )               reduce using rule 16 (expr -> expr OU expr .)
+    OU              reduce using rule 16 (expr -> expr OU expr .)
+    ET              reduce using rule 16 (expr -> expr OU expr .)
+    DIFFERENT       shift and go to state 24
+    EGAL            shift and go to state 25
+    SUPERIEUR_OU_EGAL shift and go to state 26
+    INFERIEUR_OU_EGAL shift and go to state 27
+    SUPERIEUR       shift and go to state 28
+    INFERIEUR       shift and go to state 29
+    %               shift and go to state 30
+    /               shift and go to state 31
+    *               shift and go to state 32
+    -               shift and go to state 33
+    +               shift and go to state 34
 
 
 state 41
 
-    (14) expr -> expr SUPERIEUR_OU_EGAL expr .
-    (10) expr -> expr . OU expr
-    (11) expr -> expr . ET expr
-    (12) expr -> expr . DIFFERENT expr
-    (13) expr -> expr . EGAL expr
-    (14) expr -> expr . SUPERIEUR_OU_EGAL expr
-    (15) expr -> expr . INFERIEUR_OU_EGAL expr
-    (16) expr -> expr . SUPERIEUR expr
-    (17) expr -> expr . INFERIEUR expr
-    (20) expr -> expr . % expr
-    (21) expr -> expr . / expr
-    (22) expr -> expr . * expr
-    (23) expr -> expr . - expr
-    (24) expr -> expr . + expr
-    )               reduce using rule 14 (expr -> expr SUPERIEUR_OU_EGAL expr .)
-    OU              reduce using rule 14 (expr -> expr SUPERIEUR_OU_EGAL expr .)
-    ET              reduce using rule 14 (expr -> expr SUPERIEUR_OU_EGAL expr .)
-    DIFFERENT       reduce using rule 14 (expr -> expr SUPERIEUR_OU_EGAL expr .)
-    EGAL            reduce using rule 14 (expr -> expr SUPERIEUR_OU_EGAL expr .)
-    SUPERIEUR_OU_EGAL reduce using rule 14 (expr -> expr SUPERIEUR_OU_EGAL expr .)
-    INFERIEUR_OU_EGAL reduce using rule 14 (expr -> expr SUPERIEUR_OU_EGAL expr .)
-    SUPERIEUR       reduce using rule 14 (expr -> expr SUPERIEUR_OU_EGAL expr .)
-    INFERIEUR       reduce using rule 14 (expr -> expr SUPERIEUR_OU_EGAL expr .)
-    %               shift and go to state 28
-    /               shift and go to state 29
-    *               shift and go to state 30
-    -               shift and go to state 31
-    +               shift and go to state 32
+    (17) expr -> expr ET expr .
+    (16) expr -> expr . OU expr
+    (17) expr -> expr . ET expr
+    (18) expr -> expr . DIFFERENT expr
+    (19) expr -> expr . EGAL expr
+    (20) expr -> expr . SUPERIEUR_OU_EGAL expr
+    (21) expr -> expr . INFERIEUR_OU_EGAL expr
+    (22) expr -> expr . SUPERIEUR expr
+    (23) expr -> expr . INFERIEUR expr
+    (26) expr -> expr . % expr
+    (27) expr -> expr . / expr
+    (28) expr -> expr . * expr
+    (29) expr -> expr . - expr
+    (30) expr -> expr . + expr
+    )               reduce using rule 17 (expr -> expr ET expr .)
+    OU              reduce using rule 17 (expr -> expr ET expr .)
+    ET              reduce using rule 17 (expr -> expr ET expr .)
+    DIFFERENT       shift and go to state 24
+    EGAL            shift and go to state 25
+    SUPERIEUR_OU_EGAL shift and go to state 26
+    INFERIEUR_OU_EGAL shift and go to state 27
+    SUPERIEUR       shift and go to state 28
+    INFERIEUR       shift and go to state 29
+    %               shift and go to state 30
+    /               shift and go to state 31
+    *               shift and go to state 32
+    -               shift and go to state 33
+    +               shift and go to state 34
 
 
 state 42
 
-    (15) expr -> expr INFERIEUR_OU_EGAL expr .
-    (10) expr -> expr . OU expr
-    (11) expr -> expr . ET expr
-    (12) expr -> expr . DIFFERENT expr
-    (13) expr -> expr . EGAL expr
-    (14) expr -> expr . SUPERIEUR_OU_EGAL expr
-    (15) expr -> expr . INFERIEUR_OU_EGAL expr
-    (16) expr -> expr . SUPERIEUR expr
-    (17) expr -> expr . INFERIEUR expr
-    (20) expr -> expr . % expr
-    (21) expr -> expr . / expr
-    (22) expr -> expr . * expr
-    (23) expr -> expr . - expr
-    (24) expr -> expr . + expr
-    )               reduce using rule 15 (expr -> expr INFERIEUR_OU_EGAL expr .)
-    OU              reduce using rule 15 (expr -> expr INFERIEUR_OU_EGAL expr .)
-    ET              reduce using rule 15 (expr -> expr INFERIEUR_OU_EGAL expr .)
-    DIFFERENT       reduce using rule 15 (expr -> expr INFERIEUR_OU_EGAL expr .)
-    EGAL            reduce using rule 15 (expr -> expr INFERIEUR_OU_EGAL expr .)
-    SUPERIEUR_OU_EGAL reduce using rule 15 (expr -> expr INFERIEUR_OU_EGAL expr .)
-    INFERIEUR_OU_EGAL reduce using rule 15 (expr -> expr INFERIEUR_OU_EGAL expr .)
-    SUPERIEUR       reduce using rule 15 (expr -> expr INFERIEUR_OU_EGAL expr .)
-    INFERIEUR       reduce using rule 15 (expr -> expr INFERIEUR_OU_EGAL expr .)
-    %               shift and go to state 28
-    /               shift and go to state 29
-    *               shift and go to state 30
-    -               shift and go to state 31
-    +               shift and go to state 32
+    (18) expr -> expr DIFFERENT expr .
+    (16) expr -> expr . OU expr
+    (17) expr -> expr . ET expr
+    (18) expr -> expr . DIFFERENT expr
+    (19) expr -> expr . EGAL expr
+    (20) expr -> expr . SUPERIEUR_OU_EGAL expr
+    (21) expr -> expr . INFERIEUR_OU_EGAL expr
+    (22) expr -> expr . SUPERIEUR expr
+    (23) expr -> expr . INFERIEUR expr
+    (26) expr -> expr . % expr
+    (27) expr -> expr . / expr
+    (28) expr -> expr . * expr
+    (29) expr -> expr . - expr
+    (30) expr -> expr . + expr
+    )               reduce using rule 18 (expr -> expr DIFFERENT expr .)
+    OU              reduce using rule 18 (expr -> expr DIFFERENT expr .)
+    ET              reduce using rule 18 (expr -> expr DIFFERENT expr .)
+    DIFFERENT       reduce using rule 18 (expr -> expr DIFFERENT expr .)
+    EGAL            reduce using rule 18 (expr -> expr DIFFERENT expr .)
+    SUPERIEUR_OU_EGAL reduce using rule 18 (expr -> expr DIFFERENT expr .)
+    INFERIEUR_OU_EGAL reduce using rule 18 (expr -> expr DIFFERENT expr .)
+    SUPERIEUR       reduce using rule 18 (expr -> expr DIFFERENT expr .)
+    INFERIEUR       reduce using rule 18 (expr -> expr DIFFERENT expr .)
+    %               shift and go to state 30
+    /               shift and go to state 31
+    *               shift and go to state 32
+    -               shift and go to state 33
+    +               shift and go to state 34
 
 
 state 43
 
-    (16) expr -> expr SUPERIEUR expr .
-    (10) expr -> expr . OU expr
-    (11) expr -> expr . ET expr
-    (12) expr -> expr . DIFFERENT expr
-    (13) expr -> expr . EGAL expr
-    (14) expr -> expr . SUPERIEUR_OU_EGAL expr
-    (15) expr -> expr . INFERIEUR_OU_EGAL expr
-    (16) expr -> expr . SUPERIEUR expr
-    (17) expr -> expr . INFERIEUR expr
-    (20) expr -> expr . % expr
-    (21) expr -> expr . / expr
-    (22) expr -> expr . * expr
-    (23) expr -> expr . - expr
-    (24) expr -> expr . + expr
-    )               reduce using rule 16 (expr -> expr SUPERIEUR expr .)
-    OU              reduce using rule 16 (expr -> expr SUPERIEUR expr .)
-    ET              reduce using rule 16 (expr -> expr SUPERIEUR expr .)
-    DIFFERENT       reduce using rule 16 (expr -> expr SUPERIEUR expr .)
-    EGAL            reduce using rule 16 (expr -> expr SUPERIEUR expr .)
-    SUPERIEUR_OU_EGAL reduce using rule 16 (expr -> expr SUPERIEUR expr .)
-    INFERIEUR_OU_EGAL reduce using rule 16 (expr -> expr SUPERIEUR expr .)
-    SUPERIEUR       reduce using rule 16 (expr -> expr SUPERIEUR expr .)
-    INFERIEUR       reduce using rule 16 (expr -> expr SUPERIEUR expr .)
-    %               shift and go to state 28
-    /               shift and go to state 29
-    *               shift and go to state 30
-    -               shift and go to state 31
-    +               shift and go to state 32
+    (19) expr -> expr EGAL expr .
+    (16) expr -> expr . OU expr
+    (17) expr -> expr . ET expr
+    (18) expr -> expr . DIFFERENT expr
+    (19) expr -> expr . EGAL expr
+    (20) expr -> expr . SUPERIEUR_OU_EGAL expr
+    (21) expr -> expr . INFERIEUR_OU_EGAL expr
+    (22) expr -> expr . SUPERIEUR expr
+    (23) expr -> expr . INFERIEUR expr
+    (26) expr -> expr . % expr
+    (27) expr -> expr . / expr
+    (28) expr -> expr . * expr
+    (29) expr -> expr . - expr
+    (30) expr -> expr . + expr
+    )               reduce using rule 19 (expr -> expr EGAL expr .)
+    OU              reduce using rule 19 (expr -> expr EGAL expr .)
+    ET              reduce using rule 19 (expr -> expr EGAL expr .)
+    DIFFERENT       reduce using rule 19 (expr -> expr EGAL expr .)
+    EGAL            reduce using rule 19 (expr -> expr EGAL expr .)
+    SUPERIEUR_OU_EGAL reduce using rule 19 (expr -> expr EGAL expr .)
+    INFERIEUR_OU_EGAL reduce using rule 19 (expr -> expr EGAL expr .)
+    SUPERIEUR       reduce using rule 19 (expr -> expr EGAL expr .)
+    INFERIEUR       reduce using rule 19 (expr -> expr EGAL expr .)
+    %               shift and go to state 30
+    /               shift and go to state 31
+    *               shift and go to state 32
+    -               shift and go to state 33
+    +               shift and go to state 34
 
 
 state 44
 
-    (17) expr -> expr INFERIEUR expr .
-    (10) expr -> expr . OU expr
-    (11) expr -> expr . ET expr
-    (12) expr -> expr . DIFFERENT expr
-    (13) expr -> expr . EGAL expr
-    (14) expr -> expr . SUPERIEUR_OU_EGAL expr
-    (15) expr -> expr . INFERIEUR_OU_EGAL expr
-    (16) expr -> expr . SUPERIEUR expr
-    (17) expr -> expr . INFERIEUR expr
-    (20) expr -> expr . % expr
-    (21) expr -> expr . / expr
-    (22) expr -> expr . * expr
-    (23) expr -> expr . - expr
-    (24) expr -> expr . + expr
-    )               reduce using rule 17 (expr -> expr INFERIEUR expr .)
-    OU              reduce using rule 17 (expr -> expr INFERIEUR expr .)
-    ET              reduce using rule 17 (expr -> expr INFERIEUR expr .)
-    DIFFERENT       reduce using rule 17 (expr -> expr INFERIEUR expr .)
-    EGAL            reduce using rule 17 (expr -> expr INFERIEUR expr .)
-    SUPERIEUR_OU_EGAL reduce using rule 17 (expr -> expr INFERIEUR expr .)
-    INFERIEUR_OU_EGAL reduce using rule 17 (expr -> expr INFERIEUR expr .)
-    SUPERIEUR       reduce using rule 17 (expr -> expr INFERIEUR expr .)
-    INFERIEUR       reduce using rule 17 (expr -> expr INFERIEUR expr .)
-    %               shift and go to state 28
-    /               shift and go to state 29
-    *               shift and go to state 30
-    -               shift and go to state 31
-    +               shift and go to state 32
+    (20) expr -> expr SUPERIEUR_OU_EGAL expr .
+    (16) expr -> expr . OU expr
+    (17) expr -> expr . ET expr
+    (18) expr -> expr . DIFFERENT expr
+    (19) expr -> expr . EGAL expr
+    (20) expr -> expr . SUPERIEUR_OU_EGAL expr
+    (21) expr -> expr . INFERIEUR_OU_EGAL expr
+    (22) expr -> expr . SUPERIEUR expr
+    (23) expr -> expr . INFERIEUR expr
+    (26) expr -> expr . % expr
+    (27) expr -> expr . / expr
+    (28) expr -> expr . * expr
+    (29) expr -> expr . - expr
+    (30) expr -> expr . + expr
+    )               reduce using rule 20 (expr -> expr SUPERIEUR_OU_EGAL expr .)
+    OU              reduce using rule 20 (expr -> expr SUPERIEUR_OU_EGAL expr .)
+    ET              reduce using rule 20 (expr -> expr SUPERIEUR_OU_EGAL expr .)
+    DIFFERENT       reduce using rule 20 (expr -> expr SUPERIEUR_OU_EGAL expr .)
+    EGAL            reduce using rule 20 (expr -> expr SUPERIEUR_OU_EGAL expr .)
+    SUPERIEUR_OU_EGAL reduce using rule 20 (expr -> expr SUPERIEUR_OU_EGAL expr .)
+    INFERIEUR_OU_EGAL reduce using rule 20 (expr -> expr SUPERIEUR_OU_EGAL expr .)
+    SUPERIEUR       reduce using rule 20 (expr -> expr SUPERIEUR_OU_EGAL expr .)
+    INFERIEUR       reduce using rule 20 (expr -> expr SUPERIEUR_OU_EGAL expr .)
+    %               shift and go to state 30
+    /               shift and go to state 31
+    *               shift and go to state 32
+    -               shift and go to state 33
+    +               shift and go to state 34
 
 
 state 45
 
-    (20) expr -> expr % expr .
-    (10) expr -> expr . OU expr
-    (11) expr -> expr . ET expr
-    (12) expr -> expr . DIFFERENT expr
-    (13) expr -> expr . EGAL expr
-    (14) expr -> expr . SUPERIEUR_OU_EGAL expr
-    (15) expr -> expr . INFERIEUR_OU_EGAL expr
-    (16) expr -> expr . SUPERIEUR expr
-    (17) expr -> expr . INFERIEUR expr
-    (20) expr -> expr . % expr
-    (21) expr -> expr . / expr
-    (22) expr -> expr . * expr
-    (23) expr -> expr . - expr
-    (24) expr -> expr . + expr
-    )               reduce using rule 20 (expr -> expr % expr .)
-    OU              reduce using rule 20 (expr -> expr % expr .)
-    ET              reduce using rule 20 (expr -> expr % expr .)
-    DIFFERENT       reduce using rule 20 (expr -> expr % expr .)
-    EGAL            reduce using rule 20 (expr -> expr % expr .)
-    SUPERIEUR_OU_EGAL reduce using rule 20 (expr -> expr % expr .)
-    INFERIEUR_OU_EGAL reduce using rule 20 (expr -> expr % expr .)
-    SUPERIEUR       reduce using rule 20 (expr -> expr % expr .)
-    INFERIEUR       reduce using rule 20 (expr -> expr % expr .)
-    %               reduce using rule 20 (expr -> expr % expr .)
-    /               reduce using rule 20 (expr -> expr % expr .)
-    *               reduce using rule 20 (expr -> expr % expr .)
-    -               reduce using rule 20 (expr -> expr % expr .)
-    +               reduce using rule 20 (expr -> expr % expr .)
+    (21) expr -> expr INFERIEUR_OU_EGAL expr .
+    (16) expr -> expr . OU expr
+    (17) expr -> expr . ET expr
+    (18) expr -> expr . DIFFERENT expr
+    (19) expr -> expr . EGAL expr
+    (20) expr -> expr . SUPERIEUR_OU_EGAL expr
+    (21) expr -> expr . INFERIEUR_OU_EGAL expr
+    (22) expr -> expr . SUPERIEUR expr
+    (23) expr -> expr . INFERIEUR expr
+    (26) expr -> expr . % expr
+    (27) expr -> expr . / expr
+    (28) expr -> expr . * expr
+    (29) expr -> expr . - expr
+    (30) expr -> expr . + expr
+    )               reduce using rule 21 (expr -> expr INFERIEUR_OU_EGAL expr .)
+    OU              reduce using rule 21 (expr -> expr INFERIEUR_OU_EGAL expr .)
+    ET              reduce using rule 21 (expr -> expr INFERIEUR_OU_EGAL expr .)
+    DIFFERENT       reduce using rule 21 (expr -> expr INFERIEUR_OU_EGAL expr .)
+    EGAL            reduce using rule 21 (expr -> expr INFERIEUR_OU_EGAL expr .)
+    SUPERIEUR_OU_EGAL reduce using rule 21 (expr -> expr INFERIEUR_OU_EGAL expr .)
+    INFERIEUR_OU_EGAL reduce using rule 21 (expr -> expr INFERIEUR_OU_EGAL expr .)
+    SUPERIEUR       reduce using rule 21 (expr -> expr INFERIEUR_OU_EGAL expr .)
+    INFERIEUR       reduce using rule 21 (expr -> expr INFERIEUR_OU_EGAL expr .)
+    %               shift and go to state 30
+    /               shift and go to state 31
+    *               shift and go to state 32
+    -               shift and go to state 33
+    +               shift and go to state 34
 
 
 state 46
 
-    (21) expr -> expr / expr .
-    (10) expr -> expr . OU expr
-    (11) expr -> expr . ET expr
-    (12) expr -> expr . DIFFERENT expr
-    (13) expr -> expr . EGAL expr
-    (14) expr -> expr . SUPERIEUR_OU_EGAL expr
-    (15) expr -> expr . INFERIEUR_OU_EGAL expr
-    (16) expr -> expr . SUPERIEUR expr
-    (17) expr -> expr . INFERIEUR expr
-    (20) expr -> expr . % expr
-    (21) expr -> expr . / expr
-    (22) expr -> expr . * expr
-    (23) expr -> expr . - expr
-    (24) expr -> expr . + expr
-    )               reduce using rule 21 (expr -> expr / expr .)
-    OU              reduce using rule 21 (expr -> expr / expr .)
-    ET              reduce using rule 21 (expr -> expr / expr .)
-    DIFFERENT       reduce using rule 21 (expr -> expr / expr .)
-    EGAL            reduce using rule 21 (expr -> expr / expr .)
-    SUPERIEUR_OU_EGAL reduce using rule 21 (expr -> expr / expr .)
-    INFERIEUR_OU_EGAL reduce using rule 21 (expr -> expr / expr .)
-    SUPERIEUR       reduce using rule 21 (expr -> expr / expr .)
-    INFERIEUR       reduce using rule 21 (expr -> expr / expr .)
-    %               reduce using rule 21 (expr -> expr / expr .)
-    /               reduce using rule 21 (expr -> expr / expr .)
-    *               reduce using rule 21 (expr -> expr / expr .)
-    -               reduce using rule 21 (expr -> expr / expr .)
-    +               reduce using rule 21 (expr -> expr / expr .)
+    (22) expr -> expr SUPERIEUR expr .
+    (16) expr -> expr . OU expr
+    (17) expr -> expr . ET expr
+    (18) expr -> expr . DIFFERENT expr
+    (19) expr -> expr . EGAL expr
+    (20) expr -> expr . SUPERIEUR_OU_EGAL expr
+    (21) expr -> expr . INFERIEUR_OU_EGAL expr
+    (22) expr -> expr . SUPERIEUR expr
+    (23) expr -> expr . INFERIEUR expr
+    (26) expr -> expr . % expr
+    (27) expr -> expr . / expr
+    (28) expr -> expr . * expr
+    (29) expr -> expr . - expr
+    (30) expr -> expr . + expr
+    )               reduce using rule 22 (expr -> expr SUPERIEUR expr .)
+    OU              reduce using rule 22 (expr -> expr SUPERIEUR expr .)
+    ET              reduce using rule 22 (expr -> expr SUPERIEUR expr .)
+    DIFFERENT       reduce using rule 22 (expr -> expr SUPERIEUR expr .)
+    EGAL            reduce using rule 22 (expr -> expr SUPERIEUR expr .)
+    SUPERIEUR_OU_EGAL reduce using rule 22 (expr -> expr SUPERIEUR expr .)
+    INFERIEUR_OU_EGAL reduce using rule 22 (expr -> expr SUPERIEUR expr .)
+    SUPERIEUR       reduce using rule 22 (expr -> expr SUPERIEUR expr .)
+    INFERIEUR       reduce using rule 22 (expr -> expr SUPERIEUR expr .)
+    %               shift and go to state 30
+    /               shift and go to state 31
+    *               shift and go to state 32
+    -               shift and go to state 33
+    +               shift and go to state 34
 
 
 state 47
 
-    (22) expr -> expr * expr .
-    (10) expr -> expr . OU expr
-    (11) expr -> expr . ET expr
-    (12) expr -> expr . DIFFERENT expr
-    (13) expr -> expr . EGAL expr
-    (14) expr -> expr . SUPERIEUR_OU_EGAL expr
-    (15) expr -> expr . INFERIEUR_OU_EGAL expr
-    (16) expr -> expr . SUPERIEUR expr
-    (17) expr -> expr . INFERIEUR expr
-    (20) expr -> expr . % expr
-    (21) expr -> expr . / expr
-    (22) expr -> expr . * expr
-    (23) expr -> expr . - expr
-    (24) expr -> expr . + expr
-    )               reduce using rule 22 (expr -> expr * expr .)
-    OU              reduce using rule 22 (expr -> expr * expr .)
-    ET              reduce using rule 22 (expr -> expr * expr .)
-    DIFFERENT       reduce using rule 22 (expr -> expr * expr .)
-    EGAL            reduce using rule 22 (expr -> expr * expr .)
-    SUPERIEUR_OU_EGAL reduce using rule 22 (expr -> expr * expr .)
-    INFERIEUR_OU_EGAL reduce using rule 22 (expr -> expr * expr .)
-    SUPERIEUR       reduce using rule 22 (expr -> expr * expr .)
-    INFERIEUR       reduce using rule 22 (expr -> expr * expr .)
-    %               reduce using rule 22 (expr -> expr * expr .)
-    /               reduce using rule 22 (expr -> expr * expr .)
-    *               reduce using rule 22 (expr -> expr * expr .)
-    -               reduce using rule 22 (expr -> expr * expr .)
-    +               reduce using rule 22 (expr -> expr * expr .)
+    (23) expr -> expr INFERIEUR expr .
+    (16) expr -> expr . OU expr
+    (17) expr -> expr . ET expr
+    (18) expr -> expr . DIFFERENT expr
+    (19) expr -> expr . EGAL expr
+    (20) expr -> expr . SUPERIEUR_OU_EGAL expr
+    (21) expr -> expr . INFERIEUR_OU_EGAL expr
+    (22) expr -> expr . SUPERIEUR expr
+    (23) expr -> expr . INFERIEUR expr
+    (26) expr -> expr . % expr
+    (27) expr -> expr . / expr
+    (28) expr -> expr . * expr
+    (29) expr -> expr . - expr
+    (30) expr -> expr . + expr
+    )               reduce using rule 23 (expr -> expr INFERIEUR expr .)
+    OU              reduce using rule 23 (expr -> expr INFERIEUR expr .)
+    ET              reduce using rule 23 (expr -> expr INFERIEUR expr .)
+    DIFFERENT       reduce using rule 23 (expr -> expr INFERIEUR expr .)
+    EGAL            reduce using rule 23 (expr -> expr INFERIEUR expr .)
+    SUPERIEUR_OU_EGAL reduce using rule 23 (expr -> expr INFERIEUR expr .)
+    INFERIEUR_OU_EGAL reduce using rule 23 (expr -> expr INFERIEUR expr .)
+    SUPERIEUR       reduce using rule 23 (expr -> expr INFERIEUR expr .)
+    INFERIEUR       reduce using rule 23 (expr -> expr INFERIEUR expr .)
+    %               shift and go to state 30
+    /               shift and go to state 31
+    *               shift and go to state 32
+    -               shift and go to state 33
+    +               shift and go to state 34
 
 
 state 48
 
-    (23) expr -> expr - expr .
-    (10) expr -> expr . OU expr
-    (11) expr -> expr . ET expr
-    (12) expr -> expr . DIFFERENT expr
-    (13) expr -> expr . EGAL expr
-    (14) expr -> expr . SUPERIEUR_OU_EGAL expr
-    (15) expr -> expr . INFERIEUR_OU_EGAL expr
-    (16) expr -> expr . SUPERIEUR expr
-    (17) expr -> expr . INFERIEUR expr
-    (20) expr -> expr . % expr
-    (21) expr -> expr . / expr
-    (22) expr -> expr . * expr
-    (23) expr -> expr . - expr
-    (24) expr -> expr . + expr
-    )               reduce using rule 23 (expr -> expr - expr .)
-    OU              reduce using rule 23 (expr -> expr - expr .)
-    ET              reduce using rule 23 (expr -> expr - expr .)
-    DIFFERENT       reduce using rule 23 (expr -> expr - expr .)
-    EGAL            reduce using rule 23 (expr -> expr - expr .)
-    SUPERIEUR_OU_EGAL reduce using rule 23 (expr -> expr - expr .)
-    INFERIEUR_OU_EGAL reduce using rule 23 (expr -> expr - expr .)
-    SUPERIEUR       reduce using rule 23 (expr -> expr - expr .)
-    INFERIEUR       reduce using rule 23 (expr -> expr - expr .)
-    -               reduce using rule 23 (expr -> expr - expr .)
-    +               reduce using rule 23 (expr -> expr - expr .)
-    %               shift and go to state 28
-    /               shift and go to state 29
-    *               shift and go to state 30
+    (26) expr -> expr % expr .
+    (16) expr -> expr . OU expr
+    (17) expr -> expr . ET expr
+    (18) expr -> expr . DIFFERENT expr
+    (19) expr -> expr . EGAL expr
+    (20) expr -> expr . SUPERIEUR_OU_EGAL expr
+    (21) expr -> expr . INFERIEUR_OU_EGAL expr
+    (22) expr -> expr . SUPERIEUR expr
+    (23) expr -> expr . INFERIEUR expr
+    (26) expr -> expr . % expr
+    (27) expr -> expr . / expr
+    (28) expr -> expr . * expr
+    (29) expr -> expr . - expr
+    (30) expr -> expr . + expr
+    )               reduce using rule 26 (expr -> expr % expr .)
+    OU              reduce using rule 26 (expr -> expr % expr .)
+    ET              reduce using rule 26 (expr -> expr % expr .)
+    DIFFERENT       reduce using rule 26 (expr -> expr % expr .)
+    EGAL            reduce using rule 26 (expr -> expr % expr .)
+    SUPERIEUR_OU_EGAL reduce using rule 26 (expr -> expr % expr .)
+    INFERIEUR_OU_EGAL reduce using rule 26 (expr -> expr % expr .)
+    SUPERIEUR       reduce using rule 26 (expr -> expr % expr .)
+    INFERIEUR       reduce using rule 26 (expr -> expr % expr .)
+    %               reduce using rule 26 (expr -> expr % expr .)
+    /               reduce using rule 26 (expr -> expr % expr .)
+    *               reduce using rule 26 (expr -> expr % expr .)
+    -               reduce using rule 26 (expr -> expr % expr .)
+    +               reduce using rule 26 (expr -> expr % expr .)
 
 
 state 49
 
-    (24) expr -> expr + expr .
-    (10) expr -> expr . OU expr
-    (11) expr -> expr . ET expr
-    (12) expr -> expr . DIFFERENT expr
-    (13) expr -> expr . EGAL expr
-    (14) expr -> expr . SUPERIEUR_OU_EGAL expr
-    (15) expr -> expr . INFERIEUR_OU_EGAL expr
-    (16) expr -> expr . SUPERIEUR expr
-    (17) expr -> expr . INFERIEUR expr
-    (20) expr -> expr . % expr
-    (21) expr -> expr . / expr
-    (22) expr -> expr . * expr
-    (23) expr -> expr . - expr
-    (24) expr -> expr . + expr
-    )               reduce using rule 24 (expr -> expr + expr .)
-    OU              reduce using rule 24 (expr -> expr + expr .)
-    ET              reduce using rule 24 (expr -> expr + expr .)
-    DIFFERENT       reduce using rule 24 (expr -> expr + expr .)
-    EGAL            reduce using rule 24 (expr -> expr + expr .)
-    SUPERIEUR_OU_EGAL reduce using rule 24 (expr -> expr + expr .)
-    INFERIEUR_OU_EGAL reduce using rule 24 (expr -> expr + expr .)
-    SUPERIEUR       reduce using rule 24 (expr -> expr + expr .)
-    INFERIEUR       reduce using rule 24 (expr -> expr + expr .)
-    -               reduce using rule 24 (expr -> expr + expr .)
-    +               reduce using rule 24 (expr -> expr + expr .)
-    %               shift and go to state 28
-    /               shift and go to state 29
-    *               shift and go to state 30
+    (27) expr -> expr / expr .
+    (16) expr -> expr . OU expr
+    (17) expr -> expr . ET expr
+    (18) expr -> expr . DIFFERENT expr
+    (19) expr -> expr . EGAL expr
+    (20) expr -> expr . SUPERIEUR_OU_EGAL expr
+    (21) expr -> expr . INFERIEUR_OU_EGAL expr
+    (22) expr -> expr . SUPERIEUR expr
+    (23) expr -> expr . INFERIEUR expr
+    (26) expr -> expr . % expr
+    (27) expr -> expr . / expr
+    (28) expr -> expr . * expr
+    (29) expr -> expr . - expr
+    (30) expr -> expr . + expr
+    )               reduce using rule 27 (expr -> expr / expr .)
+    OU              reduce using rule 27 (expr -> expr / expr .)
+    ET              reduce using rule 27 (expr -> expr / expr .)
+    DIFFERENT       reduce using rule 27 (expr -> expr / expr .)
+    EGAL            reduce using rule 27 (expr -> expr / expr .)
+    SUPERIEUR_OU_EGAL reduce using rule 27 (expr -> expr / expr .)
+    INFERIEUR_OU_EGAL reduce using rule 27 (expr -> expr / expr .)
+    SUPERIEUR       reduce using rule 27 (expr -> expr / expr .)
+    INFERIEUR       reduce using rule 27 (expr -> expr / expr .)
+    %               reduce using rule 27 (expr -> expr / expr .)
+    /               reduce using rule 27 (expr -> expr / expr .)
+    *               reduce using rule 27 (expr -> expr / expr .)
+    -               reduce using rule 27 (expr -> expr / expr .)
+    +               reduce using rule 27 (expr -> expr / expr .)
 
 
 state 50
 
-    (4) instruction -> IDENTIFIANT = LIRE ( ) ; .
-    IDENTIFIANT     reduce using rule 4 (instruction -> IDENTIFIANT = LIRE ( ) ; .)
-    ECRIRE          reduce using rule 4 (instruction -> IDENTIFIANT = LIRE ( ) ; .)
-    $end            reduce using rule 4 (instruction -> IDENTIFIANT = LIRE ( ) ; .)
+    (28) expr -> expr * expr .
+    (16) expr -> expr . OU expr
+    (17) expr -> expr . ET expr
+    (18) expr -> expr . DIFFERENT expr
+    (19) expr -> expr . EGAL expr
+    (20) expr -> expr . SUPERIEUR_OU_EGAL expr
+    (21) expr -> expr . INFERIEUR_OU_EGAL expr
+    (22) expr -> expr . SUPERIEUR expr
+    (23) expr -> expr . INFERIEUR expr
+    (26) expr -> expr . % expr
+    (27) expr -> expr . / expr
+    (28) expr -> expr . * expr
+    (29) expr -> expr . - expr
+    (30) expr -> expr . + expr
+    )               reduce using rule 28 (expr -> expr * expr .)
+    OU              reduce using rule 28 (expr -> expr * expr .)
+    ET              reduce using rule 28 (expr -> expr * expr .)
+    DIFFERENT       reduce using rule 28 (expr -> expr * expr .)
+    EGAL            reduce using rule 28 (expr -> expr * expr .)
+    SUPERIEUR_OU_EGAL reduce using rule 28 (expr -> expr * expr .)
+    INFERIEUR_OU_EGAL reduce using rule 28 (expr -> expr * expr .)
+    SUPERIEUR       reduce using rule 28 (expr -> expr * expr .)
+    INFERIEUR       reduce using rule 28 (expr -> expr * expr .)
+    %               reduce using rule 28 (expr -> expr * expr .)
+    /               reduce using rule 28 (expr -> expr * expr .)
+    *               reduce using rule 28 (expr -> expr * expr .)
+    -               reduce using rule 28 (expr -> expr * expr .)
+    +               reduce using rule 28 (expr -> expr * expr .)
+
+
+state 51
+
+    (29) expr -> expr - expr .
+    (16) expr -> expr . OU expr
+    (17) expr -> expr . ET expr
+    (18) expr -> expr . DIFFERENT expr
+    (19) expr -> expr . EGAL expr
+    (20) expr -> expr . SUPERIEUR_OU_EGAL expr
+    (21) expr -> expr . INFERIEUR_OU_EGAL expr
+    (22) expr -> expr . SUPERIEUR expr
+    (23) expr -> expr . INFERIEUR expr
+    (26) expr -> expr . % expr
+    (27) expr -> expr . / expr
+    (28) expr -> expr . * expr
+    (29) expr -> expr . - expr
+    (30) expr -> expr . + expr
+    )               reduce using rule 29 (expr -> expr - expr .)
+    OU              reduce using rule 29 (expr -> expr - expr .)
+    ET              reduce using rule 29 (expr -> expr - expr .)
+    DIFFERENT       reduce using rule 29 (expr -> expr - expr .)
+    EGAL            reduce using rule 29 (expr -> expr - expr .)
+    SUPERIEUR_OU_EGAL reduce using rule 29 (expr -> expr - expr .)
+    INFERIEUR_OU_EGAL reduce using rule 29 (expr -> expr - expr .)
+    SUPERIEUR       reduce using rule 29 (expr -> expr - expr .)
+    INFERIEUR       reduce using rule 29 (expr -> expr - expr .)
+    -               reduce using rule 29 (expr -> expr - expr .)
+    +               reduce using rule 29 (expr -> expr - expr .)
+    %               shift and go to state 30
+    /               shift and go to state 31
+    *               shift and go to state 32
+
+
+state 52
+
+    (30) expr -> expr + expr .
+    (16) expr -> expr . OU expr
+    (17) expr -> expr . ET expr
+    (18) expr -> expr . DIFFERENT expr
+    (19) expr -> expr . EGAL expr
+    (20) expr -> expr . SUPERIEUR_OU_EGAL expr
+    (21) expr -> expr . INFERIEUR_OU_EGAL expr
+    (22) expr -> expr . SUPERIEUR expr
+    (23) expr -> expr . INFERIEUR expr
+    (26) expr -> expr . % expr
+    (27) expr -> expr . / expr
+    (28) expr -> expr . * expr
+    (29) expr -> expr . - expr
+    (30) expr -> expr . + expr
+    )               reduce using rule 30 (expr -> expr + expr .)
+    OU              reduce using rule 30 (expr -> expr + expr .)
+    ET              reduce using rule 30 (expr -> expr + expr .)
+    DIFFERENT       reduce using rule 30 (expr -> expr + expr .)
+    EGAL            reduce using rule 30 (expr -> expr + expr .)
+    SUPERIEUR_OU_EGAL reduce using rule 30 (expr -> expr + expr .)
+    INFERIEUR_OU_EGAL reduce using rule 30 (expr -> expr + expr .)
+    SUPERIEUR       reduce using rule 30 (expr -> expr + expr .)
+    INFERIEUR       reduce using rule 30 (expr -> expr + expr .)
+    -               reduce using rule 30 (expr -> expr + expr .)
+    +               reduce using rule 30 (expr -> expr + expr .)
+    %               shift and go to state 30
+    /               shift and go to state 31
+    *               shift and go to state 32
+
+
+state 53
+
+    (10) instruction -> IDENTIFIANT = LIRE ( ) . ;
+    ;               shift and go to state 56
+
+
+state 54
+
+    (12) ecrire -> ECRIRE ( expr ) ; .
+    SI              reduce using rule 12 (ecrire -> ECRIRE ( expr ) ; .)
+    IDENTIFIANT     reduce using rule 12 (ecrire -> ECRIRE ( expr ) ; .)
+    ECRIRE          reduce using rule 12 (ecrire -> ECRIRE ( expr ) ; .)
+    $end            reduce using rule 12 (ecrire -> ECRIRE ( expr ) ; .)
+    }               reduce using rule 12 (ecrire -> ECRIRE ( expr ) ; .)
+    SINON           reduce using rule 12 (ecrire -> ECRIRE ( expr ) ; .)
+
+
+state 55
+
+    (6) instruction -> SI ( expr ) { listeInstructions . } listeSinonsi SINON { listeInstructions }
+    (7) instruction -> SI ( expr ) { listeInstructions . } SINON { listeInstructions }
+    (8) instruction -> SI ( expr ) { listeInstructions . } listeSinonsi
+    (9) instruction -> SI ( expr ) { listeInstructions . }
+    }               shift and go to state 57
+
+
+state 56
+
+    (10) instruction -> IDENTIFIANT = LIRE ( ) ; .
+    SI              reduce using rule 10 (instruction -> IDENTIFIANT = LIRE ( ) ; .)
+    IDENTIFIANT     reduce using rule 10 (instruction -> IDENTIFIANT = LIRE ( ) ; .)
+    ECRIRE          reduce using rule 10 (instruction -> IDENTIFIANT = LIRE ( ) ; .)
+    $end            reduce using rule 10 (instruction -> IDENTIFIANT = LIRE ( ) ; .)
+    }               reduce using rule 10 (instruction -> IDENTIFIANT = LIRE ( ) ; .)
+    SINON           reduce using rule 10 (instruction -> IDENTIFIANT = LIRE ( ) ; .)
+
+
+state 57
+
+    (6) instruction -> SI ( expr ) { listeInstructions } . listeSinonsi SINON { listeInstructions }
+    (7) instruction -> SI ( expr ) { listeInstructions } . SINON { listeInstructions }
+    (8) instruction -> SI ( expr ) { listeInstructions } . listeSinonsi
+    (9) instruction -> SI ( expr ) { listeInstructions } .
+    (4) listeSinonsi -> . instruction listeInstructions
+    (5) listeSinonsi -> . instruction
+    (6) instruction -> . SI ( expr ) { listeInstructions } listeSinonsi SINON { listeInstructions }
+    (7) instruction -> . SI ( expr ) { listeInstructions } SINON { listeInstructions }
+    (8) instruction -> . SI ( expr ) { listeInstructions } listeSinonsi
+    (9) instruction -> . SI ( expr ) { listeInstructions }
+    (10) instruction -> . IDENTIFIANT = LIRE ( ) ;
+    (11) instruction -> . ecrire
+    (12) ecrire -> . ECRIRE ( expr ) ;
+  ! shift/reduce conflict for SINON resolved as shift
+  ! shift/reduce conflict for SI resolved as shift
+  ! shift/reduce conflict for IDENTIFIANT resolved as shift
+  ! shift/reduce conflict for ECRIRE resolved as shift
+    SINON           shift and go to state 59
+    $end            reduce using rule 9 (instruction -> SI ( expr ) { listeInstructions } .)
+    }               reduce using rule 9 (instruction -> SI ( expr ) { listeInstructions } .)
+    SI              shift and go to state 4
+    IDENTIFIANT     shift and go to state 5
+    ECRIRE          shift and go to state 7
+
+    listeSinonsi                   shift and go to state 58
+    instruction                    shift and go to state 60
+    ecrire                         shift and go to state 6
+
+state 58
+
+    (6) instruction -> SI ( expr ) { listeInstructions } listeSinonsi . SINON { listeInstructions }
+    (8) instruction -> SI ( expr ) { listeInstructions } listeSinonsi .
+  ! shift/reduce conflict for SINON resolved as shift
+    SINON           shift and go to state 61
+    SI              reduce using rule 8 (instruction -> SI ( expr ) { listeInstructions } listeSinonsi .)
+    IDENTIFIANT     reduce using rule 8 (instruction -> SI ( expr ) { listeInstructions } listeSinonsi .)
+    ECRIRE          reduce using rule 8 (instruction -> SI ( expr ) { listeInstructions } listeSinonsi .)
+    $end            reduce using rule 8 (instruction -> SI ( expr ) { listeInstructions } listeSinonsi .)
+    }               reduce using rule 8 (instruction -> SI ( expr ) { listeInstructions } listeSinonsi .)
+
+
+state 59
+
+    (7) instruction -> SI ( expr ) { listeInstructions } SINON . { listeInstructions }
+    {               shift and go to state 62
+
+
+state 60
+
+    (4) listeSinonsi -> instruction . listeInstructions
+    (5) listeSinonsi -> instruction .
+    (2) listeInstructions -> . instruction listeInstructions
+    (3) listeInstructions -> . instruction
+    (6) instruction -> . SI ( expr ) { listeInstructions } listeSinonsi SINON { listeInstructions }
+    (7) instruction -> . SI ( expr ) { listeInstructions } SINON { listeInstructions }
+    (8) instruction -> . SI ( expr ) { listeInstructions } listeSinonsi
+    (9) instruction -> . SI ( expr ) { listeInstructions }
+    (10) instruction -> . IDENTIFIANT = LIRE ( ) ;
+    (11) instruction -> . ecrire
+    (12) ecrire -> . ECRIRE ( expr ) ;
+  ! shift/reduce conflict for SI resolved as shift
+  ! shift/reduce conflict for IDENTIFIANT resolved as shift
+  ! shift/reduce conflict for ECRIRE resolved as shift
+    $end            reduce using rule 5 (listeSinonsi -> instruction .)
+    }               reduce using rule 5 (listeSinonsi -> instruction .)
+    SINON           reduce using rule 5 (listeSinonsi -> instruction .)
+    SI              shift and go to state 4
+    IDENTIFIANT     shift and go to state 5
+    ECRIRE          shift and go to state 7
+
+    instruction                    shift and go to state 3
+    listeInstructions              shift and go to state 63
+    ecrire                         shift and go to state 6
+
+state 61
+
+    (6) instruction -> SI ( expr ) { listeInstructions } listeSinonsi SINON . { listeInstructions }
+    {               shift and go to state 64
+
+
+state 62
+
+    (7) instruction -> SI ( expr ) { listeInstructions } SINON { . listeInstructions }
+    (2) listeInstructions -> . instruction listeInstructions
+    (3) listeInstructions -> . instruction
+    (6) instruction -> . SI ( expr ) { listeInstructions } listeSinonsi SINON { listeInstructions }
+    (7) instruction -> . SI ( expr ) { listeInstructions } SINON { listeInstructions }
+    (8) instruction -> . SI ( expr ) { listeInstructions } listeSinonsi
+    (9) instruction -> . SI ( expr ) { listeInstructions }
+    (10) instruction -> . IDENTIFIANT = LIRE ( ) ;
+    (11) instruction -> . ecrire
+    (12) ecrire -> . ECRIRE ( expr ) ;
+    SI              shift and go to state 4
+    IDENTIFIANT     shift and go to state 5
+    ECRIRE          shift and go to state 7
+
+    listeInstructions              shift and go to state 65
+    instruction                    shift and go to state 3
+    ecrire                         shift and go to state 6
+
+state 63
+
+    (4) listeSinonsi -> instruction listeInstructions .
+    $end            reduce using rule 4 (listeSinonsi -> instruction listeInstructions .)
+    }               reduce using rule 4 (listeSinonsi -> instruction listeInstructions .)
+    SINON           reduce using rule 4 (listeSinonsi -> instruction listeInstructions .)
+    SI              reduce using rule 4 (listeSinonsi -> instruction listeInstructions .)
+    IDENTIFIANT     reduce using rule 4 (listeSinonsi -> instruction listeInstructions .)
+    ECRIRE          reduce using rule 4 (listeSinonsi -> instruction listeInstructions .)
+
+
+state 64
+
+    (6) instruction -> SI ( expr ) { listeInstructions } listeSinonsi SINON { . listeInstructions }
+    (2) listeInstructions -> . instruction listeInstructions
+    (3) listeInstructions -> . instruction
+    (6) instruction -> . SI ( expr ) { listeInstructions } listeSinonsi SINON { listeInstructions }
+    (7) instruction -> . SI ( expr ) { listeInstructions } SINON { listeInstructions }
+    (8) instruction -> . SI ( expr ) { listeInstructions } listeSinonsi
+    (9) instruction -> . SI ( expr ) { listeInstructions }
+    (10) instruction -> . IDENTIFIANT = LIRE ( ) ;
+    (11) instruction -> . ecrire
+    (12) ecrire -> . ECRIRE ( expr ) ;
+    SI              shift and go to state 4
+    IDENTIFIANT     shift and go to state 5
+    ECRIRE          shift and go to state 7
+
+    listeInstructions              shift and go to state 66
+    instruction                    shift and go to state 3
+    ecrire                         shift and go to state 6
+
+state 65
+
+    (7) instruction -> SI ( expr ) { listeInstructions } SINON { listeInstructions . }
+    }               shift and go to state 67
+
+
+state 66
+
+    (6) instruction -> SI ( expr ) { listeInstructions } listeSinonsi SINON { listeInstructions . }
+    }               shift and go to state 68
+
+
+state 67
+
+    (7) instruction -> SI ( expr ) { listeInstructions } SINON { listeInstructions } .
+    SI              reduce using rule 7 (instruction -> SI ( expr ) { listeInstructions } SINON { listeInstructions } .)
+    IDENTIFIANT     reduce using rule 7 (instruction -> SI ( expr ) { listeInstructions } SINON { listeInstructions } .)
+    ECRIRE          reduce using rule 7 (instruction -> SI ( expr ) { listeInstructions } SINON { listeInstructions } .)
+    $end            reduce using rule 7 (instruction -> SI ( expr ) { listeInstructions } SINON { listeInstructions } .)
+    }               reduce using rule 7 (instruction -> SI ( expr ) { listeInstructions } SINON { listeInstructions } .)
+    SINON           reduce using rule 7 (instruction -> SI ( expr ) { listeInstructions } SINON { listeInstructions } .)
+
+
+state 68
+
+    (6) instruction -> SI ( expr ) { listeInstructions } listeSinonsi SINON { listeInstructions } .
+    SI              reduce using rule 6 (instruction -> SI ( expr ) { listeInstructions } listeSinonsi SINON { listeInstructions } .)
+    IDENTIFIANT     reduce using rule 6 (instruction -> SI ( expr ) { listeInstructions } listeSinonsi SINON { listeInstructions } .)
+    ECRIRE          reduce using rule 6 (instruction -> SI ( expr ) { listeInstructions } listeSinonsi SINON { listeInstructions } .)
+    $end            reduce using rule 6 (instruction -> SI ( expr ) { listeInstructions } listeSinonsi SINON { listeInstructions } .)
+    }               reduce using rule 6 (instruction -> SI ( expr ) { listeInstructions } listeSinonsi SINON { listeInstructions } .)
+    SINON           reduce using rule 6 (instruction -> SI ( expr ) { listeInstructions } listeSinonsi SINON { listeInstructions } .)
+
+
+Conflicts:
+
+shift/reduce conflict for SI in state 3 resolved as shift
+shift/reduce conflict for IDENTIFIANT in state 3 resolved as shift
+shift/reduce conflict for ECRIRE in state 3 resolved as shift
+shift/reduce conflict for SINON in state 57 resolved as shift
+shift/reduce conflict for SI in state 57 resolved as shift
+shift/reduce conflict for IDENTIFIANT in state 57 resolved as shift
+shift/reduce conflict for ECRIRE in state 57 resolved as shift
+shift/reduce conflict for SINON in state 58 resolved as shift
+shift/reduce conflict for SI in state 60 resolved as shift
+shift/reduce conflict for IDENTIFIANT in state 60 resolved as shift
+shift/reduce conflict for ECRIRE in state 60 resolved as shift
