@@ -190,9 +190,19 @@ class FloParser(Parser):
 		return arbre_abstrait.Conditionnelle(p[3],p[6],None,None)
 	'''
 
-	@_('TYPE_ENTIER IDENTIFIANT ";"')
-	def declaration(self, p):
-		return arbre_abstrait.Declaration(p[0], p.IDENTIFIANT)
+	@_('TYPE_ENTIER IDENTIFIANT ";"',
+    	'TYPE_BOOLEEN IDENTIFIANT ";"')
+	def instruction(self, p):
+		return arbre_abstrait.Declaration(p[0], p[1])
+	
+	@_('IDENTIFIANT "=" expr ";"')
+	def instruction(self, p):
+		return arbre_abstrait.Affectation(p[0], p[2])
+	
+	@_('TYPE_ENTIER IDENTIFIANT "=" expr ";"',
+    	'TYPE_BOOLEEN IDENTIFIANT "=" expr ";"')
+	def instruction(self, p):
+		return arbre_abstrait.DeclarationAffectation(p[0], p[1], p[3])
 
 if __name__ == '__main__':
 	lexer = FloLexer()
