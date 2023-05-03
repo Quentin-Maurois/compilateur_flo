@@ -66,6 +66,19 @@ class Operation:
 		self.exp2.afficher(indent+1)
 		afficher("</operation>",indent)
 
+class Comparaison:
+	def __init__(self,op,exp1,exp2):
+		self.exp1 = exp1
+		self.op = op
+		self.exp2 = exp2
+
+	def afficher(self,indent=0):
+		afficher("<Comparaison>",indent)
+		afficher("[Comparateur:" + self.op + "]",indent+1)
+		self.exp1.afficher(indent+1)
+		self.exp2.afficher(indent+1)
+		afficher("</Comparaison>",indent)
+
 
 class Entier:
 	def __init__(self,valeur):

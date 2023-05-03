@@ -3,7 +3,9 @@ from sly import Lexer
 
 class FloLexer(Lexer):
 	# Noms des lexèmes (sauf les litéraux). En majuscule. Ordre non important
-	tokens = {  IDENTIFIANT, ENTIER, ECRIRE, LIRE, TYPE_ENTIER, TYPE_BOOLEEN, INFERIEUR, INFERIEUR_OU_EGAL, SUPERIEUR, SUPERIEUR_OU_EGAL, EGAL, DIFFERENT, ET, OU, NON, VRAI, FAUX, SI, SINON, SINON_SI,TANT_QUE, RETOURNER}
+	tokens = {  IDENTIFIANT, ENTIER, ECRIRE, LIRE, TYPE_ENTIER, TYPE_BOOLEEN, INFERIEUR, INFERIEUR_OU_EGAL, SUPERIEUR, SUPERIEUR_OU_EGAL, EGAL, DIFFERENT,
+	    ET, OU, NON, VRAI, FAUX, SI, SINON, SINON_SI,TANT_QUE, RETOURNER, ACCOLADE_OUVRANTE, ACCOLADE_FERMANTE, PARENTHESE_OUVRANTE, PARENTHESE_FERMANTE, VIRGULE, POINT_VIRGULE,
+		"<=", ">=", "==", "!=", "<", ">", "(", ")", "{", "}", ";", ","}
 
 	#Les caractères litéraux sont des caractères uniques qui sont retournés tel quel quand rencontré par l'analyse lexicale. 
 	#Les litéraux sont vérifiés en dernier, après toutes les autres règles définies par des expressions régulières.
@@ -46,13 +48,12 @@ class FloLexer(Lexer):
 
 	
 	#opérateurs
-	"""
 	INFERIEUR_OU_EGAL= r'<='
 	SUPERIEUR_OU_EGAL = r'>='
 	EGAL = r'=='
 	DIFFERENT = r'!='
 	INFERIEUR = r'<'
-	SUPERIEUR = r'>'"""
+	SUPERIEUR = r'>'
 
 	# comparaison
 	IDENTIFIANT['=='] = EGAL
@@ -63,10 +64,10 @@ class FloLexer(Lexer):
 	IDENTIFIANT["<="] = INFERIEUR_OU_EGAL
 
 	# formalisme
-	"""IDENTIFIANT['{'] = ACCOLADE_OUVRANTE
+	IDENTIFIANT['{'] = ACCOLADE_OUVRANTE
 	IDENTIFIANT['}'] = ACCOLADE_FERMANTE
 	IDENTIFIANT['('] = PARENTHESE_OUVRANTE
-	IDENTIFIANT[')'] = PARENTHESE_FERMANTE"""
+	IDENTIFIANT[')'] = PARENTHESE_FERMANTE
 
 	# Permet de conserver les numéros de ligne. Utile pour les messages d'erreurs
 	@_(r'\n+')

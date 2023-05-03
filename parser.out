@@ -36,21 +36,43 @@ Rule 32    expr -> expr + expr  [precedence=left, level=4]
 
 Unused terminals:
 
+    ==
+    PARENTHESE_OUVRANTE
+    POINT_VIRGULE
+    ,
+    !=
+    PARENTHESE_FERMANTE
+    >=
+    <
+    <=
+    TANT_QUE
+    >
+    ACCOLADE_OUVRANTE
+    VIRGULE
+    ACCOLADE_FERMANTE
     TYPE_BOOLEEN
     RETOURNER
-    TANT_QUE
 
 Terminals, with rules where they appear:
 
+!=                   : 
 %                    : 28
 (                    : 8 9 10 11 12 14 27
 )                    : 8 9 10 11 12 14 27
 *                    : 30
 +                    : 32
+,                    : 
 -                    : 31
 /                    : 29
 ;                    : 7 12 14
+<                    : 
+<=                   : 
 =                    : 12
+==                   : 
+>                    : 
+>=                   : 
+ACCOLADE_FERMANTE    : 
+ACCOLADE_OUVRANTE    : 
 DIFFERENT            : 20
 ECRIRE               : 14
 EGAL                 : 21
@@ -63,6 +85,9 @@ INFERIEUR_OU_EGAL    : 23
 LIRE                 : 12
 NON                  : 17
 OU                   : 18
+PARENTHESE_FERMANTE  : 
+PARENTHESE_OUVRANTE  : 
+POINT_VIRGULE        : 
 RETOURNER            : 
 SI                   : 8 9 10 11
 SINON                : 8 9
@@ -72,6 +97,7 @@ SUPERIEUR_OU_EGAL    : 22
 TANT_QUE             : 
 TYPE_BOOLEEN         : 
 TYPE_ENTIER          : 7
+VIRGULE              : 
 VRAI                 : 16
 error                : 
 {                    : 8 8 9 9 10 11

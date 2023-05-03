@@ -91,27 +91,27 @@ class FloParser(Parser):
 	
 	@_('expr INFERIEUR expr')
 	def expr(self, p):
-		return arbre_abstrait.Operation('<',p[0],p[2])
+		return arbre_abstrait.Comparaison('<',p[0],p[2])
 	
 	@_('expr SUPERIEUR expr')
 	def expr(self, p):
-		return arbre_abstrait.Operation('>',p[0],p[2])
+		return arbre_abstrait.Comparaison('>',p[0],p[2])
 	
 	@_('expr INFERIEUR_OU_EGAL expr')
 	def expr(self, p):
-		return arbre_abstrait.Operation('<=',p[0],p[2])
+		return arbre_abstrait.Comparaison('<=',p[0],p[2])
 	
 	@_('expr SUPERIEUR_OU_EGAL expr')
 	def expr(self, p):
-		return arbre_abstrait.Operation('>=',p[0],p[2])
+		return arbre_abstrait.Comparaison('>=',p[0],p[2])
 	
 	@_('expr EGAL expr')
 	def expr(self, p):
-		return arbre_abstrait.Operation('==',p[0],p[2])
+		return arbre_abstrait.Comparaison('==',p[0],p[2])
 	
 	@_('expr DIFFERENT expr')
 	def expr(self, p):
-		return arbre_abstrait.Operation('!=',p[0],p[2])
+		return arbre_abstrait.Comparaison('!=',p[0],p[2])
 	
 	@_('expr ET expr')
 	def expr(self, p):
