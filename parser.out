@@ -107,22 +107,22 @@ Rule 32    expr -> expr + expr  [precedence=left, level=4]
 
 Unused terminals:
 
-    ==
-    PARENTHESE_OUVRANTE
-    POINT_VIRGULE
-    ,
-    !=
-    PARENTHESE_FERMANTE
-    >=
-    <
-    <=
-    TANT_QUE
-    >
-    ACCOLADE_OUVRANTE
-    VIRGULE
     ACCOLADE_FERMANTE
+    VIRGULE
+    >=
+    PARENTHESE_FERMANTE
+    PARENTHESE_OUVRANTE
+    >
     TYPE_BOOLEEN
+    <=
+    <
+    ,
+    ==
+    !=
     RETOURNER
+    ACCOLADE_OUVRANTE
+    POINT_VIRGULE
+    TANT_QUE
 
 Terminals, with rules where they appear:
 
