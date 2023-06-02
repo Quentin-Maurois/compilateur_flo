@@ -41,20 +41,20 @@ Rule 37    expr -> expr + expr  [precedence=left, level=4]
 
 Unused terminals:
 
-    RETOURNER
-    >
-    >=
-    VIRGULE
     ==
-    !=
-    ,
+    RETOURNER
     ACCOLADE_FERMANTE
-    PARENTHESE_OUVRANTE
-    POINT_VIRGULE
-    PARENTHESE_FERMANTE
-    <=
     ACCOLADE_OUVRANTE
+    <=
+    !=
+    POINT_VIRGULE
+    VIRGULE
+    PARENTHESE_FERMANTE
     <
+    >
+    ,
+    >=
+    PARENTHESE_OUVRANTE
 
 Terminals, with rules where they appear:
 
