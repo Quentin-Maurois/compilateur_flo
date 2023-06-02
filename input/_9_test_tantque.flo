@@ -1,0 +1,6 @@
+entier a = 0;
+
+tantque( a < 10 ) {
+    ecrire(1);
+    a = a + 1;
+}
