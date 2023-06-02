@@ -101,10 +101,10 @@ class Conditionnelle:
 			afficher("<Alors>",indent)
 			self.instructions[i].afficher(indent+2)
 			afficher("</Alors>",indent)
-		if len(self.instructions) > i+1:
-			afficher("<Sinon>",indent+1)
-			self.listeSinon.afficher(indent+2)
-			afficher("</Sinon>",indent+1)
+			if len(self.instructions) > i+1:
+				afficher("<Sinon>",indent+1)
+				self.listeSinon.afficher(indent+2)
+				afficher("</Sinon>",indent+1)
 		afficher("</Conditionnelle>",indent)
 
 
