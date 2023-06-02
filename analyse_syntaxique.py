@@ -7,6 +7,10 @@ class FloParser(Parser):
 	debugfile = 'parser.out'
 	# On récupère la liste des lexèmes de l'analyse lexicale
 	tokens = FloLexer.tokens
+
+	print()
+	print(tokens)
+	print()
 	# Règles gramaticales et actions associées
 
 	precedence = (
@@ -157,10 +161,11 @@ class FloParser(Parser):
 			return arbre_abstrait.Conditionnelle(p[2],p[5])
 		elif len(p) == 9:
 			return arbre_abstrait.Conditionnelle(p[2],[p[5], p[7]])
-		"""
-	"""@_('TANTQUE "(" expr ")" { listeInstructions }')
+	"""
+	
+	@_('TANT_QUE "(" expr ")" "{" listeInstructions "}"')
 	def instruction(self, p):
-		return arbre_abstrait.TantQue(p.expr,p.listeInstructions)"""
+		return arbre_abstrait.TantQue(p[2],p[5])
 
 
 	@_('TYPE_ENTIER IDENTIFIANT ";"',

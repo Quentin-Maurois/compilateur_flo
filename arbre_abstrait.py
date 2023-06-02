@@ -94,7 +94,8 @@ class Conditionnelle:
 		afficher("<Alors>",indent)
 		self.instructions[0].afficher(indent+2)
 		afficher("</Alors>",indent)
-		for i in range(1,len(self.expressions)):
+		i = 1
+		while i < len(self.expressions):
 			afficher("<SinonSi>",indent)
 			self.expressions[i].afficher(indent+2)
 			afficher("</SinonSi>",indent)
@@ -109,14 +110,22 @@ class Conditionnelle:
 
 
 class TantQue:
-	def __init__(self,condition,faire):
-		self.condition = condition
-		self.faire = faire
-	def afficher(self,indent=0):
-		afficher("<tantQue>",indent)
-		self.condition.afficher(indent+1)
-		self.faire.afficher(indent+1)
-		afficher("</tantQue>",indent)
+	def __init__(self, expression, instructions):
+		self.expression = expression
+		self.instructions = instructions
+		print("patate1================================================================================================================")
+	def afficher(self, indent = 0):
+		print("patate=================================================================================================================")
+		afficher("<tantQue>", indent)
+		afficher("<expression>", indent + 1)
+		self.expression.afficher(indent + 2)
+		# afficher(self.expression, indent + 2)
+		afficher("</expression>", indent + 1)
+		afficher("<instructions>", indent + 1)
+		self.instructions.afficher(indent + 2)
+		# afficher(self.instructions, indent + 2)
+		afficher("<instructions>", indent + 1)
+		afficher("</tantQue>", indent)
 
 
 class Declaration:
@@ -128,6 +137,7 @@ class Declaration:
 		afficher("[type = " + self.type + "]", indent + 1)
 		afficher("[nom = " + self.nom + "]", indent + 1)
 		afficher("</declaration>", indent)
+
 
 class Affectation:
 	def __init__(self, nom, expression):
