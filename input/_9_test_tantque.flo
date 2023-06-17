@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 
 
-tantque( vrai ) {
+a = 0;
+
+tantque( a < 10 ) {
+=======
+tantque( 0 < 10 ) {
+>>>>>>> 6a78e4ff4799183dd8ad455c8d1d6c70521907d9
     ecrire (0);
+    a = a + 1;
 }

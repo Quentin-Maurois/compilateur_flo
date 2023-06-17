@@ -4,27 +4,35 @@ from analyse_lexicale import FloLexer
 import arbre_abstrait
 
 class FloParser(Parser):
-	debugfile = 'parser.out'
 	# On récupère la liste des lexèmes de l'analyse lexicale
 	tokens = FloLexer.tokens
 
-	print()
-	print(tokens)
-	print()
-	# Règles gramaticales et actions associées
-
-	precedence = (
-		('left', 'ET', 'OU'),
+	precedence = (  
+		('left', 'ET'),
+		('left','OU'),
 		('right', 'NON'),
-		('left', 'INFERIEUR_OU_EGAL', 'SUPERIEUR_OU_EGAL', 'EGAL', 'DIFFERENT', 'INFERIEUR', 'SUPERIEUR'),
+		('right', 'EGAL'),
+		('left', '<', '>', 'INFERIEUR_OU_EGAL', 'SUPERIEUR_OU_EGAL', 'DIFFERENT'),
 		('left', '+', '-'),
 		('left', '*', '/', '%'),
-		('left', '(', ')'),
-	)
+)
 
-	@_('listeInstructions')
+	# Règles gramaticales et actions associées
+
+	@_('listeFonctions listeInstructions')
 	def prog(self, p):
-		return arbre_abstrait.Programme(p[0])
+		return arbre_abstrait.Programme(p[0], p[1])
+	
+	@_('fonction')
+	def listeFonctions(self, p):
+		l = arbre_abstrait.ListeFonctions()
+		l.fonctions.append(p[0])
+		return l
+
+	@_('fonction listeFonctions')
+	def listeFonctions(self, p):
+		p[1].fonctions.insert(0, p[0])
+		return p[1]
 
 	@_('instruction')
 	def listeInstructions(self, p):
@@ -34,142 +42,202 @@ class FloParser(Parser):
 					
 	@_('instruction listeInstructions')
 	def listeInstructions(self, p):
-		p[1].instructions.append(p[0])
+		p[1].instructions.insert(0,p[0])
 		return p[1]
 
-	@_('listeSinonsi')
-	def prog(self, p):
-		return arbre_abstrait.listeSinonsi(p[0])
-
-	@_('SINON_SI')
-	def listeSinonsi(self, p):
-		l = arbre_abstrait.listeSinonsi()
-		l.sinonsi.append(p[0])
-		return l
-
-
-	@_('SINON_SI listeSinonsi')
-	def listeSinonsi(self, p):
-		p[1].sinonSi.append(p[0])
-		return p[1]
-		
 	@_('ecrire')
 	def instruction(self, p):
 		return p[0]
-
-	@_('LIRE"("")"')
-	def produit(self,p):
-		return arbre_abstrait.Lire()
 	
+			
 	@_('ECRIRE "(" expr ")" ";"')
 	def ecrire(self, p):
-		return arbre_abstrait.Ecrire(p.expr)
+		return arbre_abstrait.Ecrire(p.expr) #p.expr = p[2]
 		
-	@_('expr "+" expr')
-	def expr(self, p):
-		return arbre_abstrait.Operation('+',p[0],p[2])
+	##@_('expr "+" expr')
+	##def expr(self, p):
+	##	return arbre_abstrait.Operation('+',p[0],p[2])
 
-	@_('expr "-" expr')
-	def expr(self, p):
-		return arbre_abstrait.Operation('-',p[0],p[2])
+	##@_('expr "*" expr')
+	##def expr(self, p):
+	##	return arbre_abstrait.Operation('*',p[0],p[2])
 
-	@_('expr "*" expr')
-	def expr(self, p):
-		return arbre_abstrait.Operation('*',p[0],p[2])
-
-	@_('expr "/" expr')
-	def expr(self, p):
-		return arbre_abstrait.Operation('/',p[0],p[2])
-
-	@_('expr "%" expr')
-	def expr(self, p):
-		return arbre_abstrait.Operation('%',p[0],p[2])
 
 	@_('"(" expr ")"')
-	def expr(self, p):
-		return p.expr #ou p[1]
+	def fact(self, p):
+		return p[1]
 		
 	@_('ENTIER')
-	def expr(self, p):
+	def fact(self, p):
 		return arbre_abstrait.Entier(p.ENTIER) #p.ENTIER = p[0]
 	
-	@_('expr INFERIEUR expr')
-	def expr(self, p):
+	@_('fact')
+	def produit(self,p):
+		return p.fact
+	
+	@_('expr "+" produit')
+	def expr(self,p):
+		return arbre_abstrait.Operation('+',p[0],p[2])
+	
+	@_('produit')
+	def expr(self,p):
+		return p[0]
+	
+	@_('expr "-" produit')
+	def expr(self,p):
+		return arbre_abstrait.Operation('-',p[0],p[2])
+
+	@_('"-" fact')
+	def produit(self,p):
+		return arbre_abstrait.Operation('*',arbre_abstrait.Entier(-1),p[1])
+
+	@_('produit "*" fact')
+	def produit(self,p):
+		return arbre_abstrait.Operation('*',p[0],p[2])
+
+	@_('produit "/" fact')
+	def produit(self,p):
+		return arbre_abstrait.Operation('/',p[0],p[2])
+
+	@_('produit "%" fact')
+	def produit(self,p):
+		return arbre_abstrait.Operation('%',p[0],p[2])
+	
+	@_('expr "<" expr')
+	def expr(self,p):
 		return arbre_abstrait.Comparaison('<',p[0],p[2])
 	
-	@_('expr SUPERIEUR expr')
-	def expr(self, p):
+	@_('expr ">" expr')
+	def expr(self,p):
 		return arbre_abstrait.Comparaison('>',p[0],p[2])
 	
+	@_('expr EGAL expr')
+	def expr(self,p):
+		return arbre_abstrait.Comparaison('=',p[0],p[2])
+	
 	@_('expr INFERIEUR_OU_EGAL expr')
-	def expr(self, p):
+	def expr(self,p):
 		return arbre_abstrait.Comparaison('<=',p[0],p[2])
 	
 	@_('expr SUPERIEUR_OU_EGAL expr')
-	def expr(self, p):
+	def expr(self,p):
 		return arbre_abstrait.Comparaison('>=',p[0],p[2])
 	
-	@_('expr EGAL expr')
-	def expr(self, p):
-		return arbre_abstrait.Comparaison('==',p[0],p[2])
-	
 	@_('expr DIFFERENT expr')
-	def expr(self, p):
+	def expr(self,p):
 		return arbre_abstrait.Comparaison('!=',p[0],p[2])
 	
-	@_('expr ET expr')
-	def expr(self, p):
-		return arbre_abstrait.Operation('&&',p[0],p[2])
 	
-	@_('expr OU expr')
-	def expr(self, p):
-		return arbre_abstrait.Operation('||',p[0],p[2])
 	
-	@_('NON expr')
-	def expr(self, p):
-		return arbre_abstrait.Operation('!',p[1])
+	@_('LIRE "(" ")"')
+	def expr(self,p):
+		return arbre_abstrait.Lire()
 	
+	@_('IDENTIFIANT')
+	def variable(self,p):
+		return arbre_abstrait.Variable(p[0])
+	
+	@_('variable')
+	def fact(self, p):
+		return p[0]
+
+	@_('expr "," expr',
+    'superExpression "," expr')
+	def superExpression(self, p):
+		return arbre_abstrait.SuperExpression(p[0], p[2])
+	
+	@_('TYPE_ENTIER expr',
+    'TYPE_BOOLEEN expr')
+	def parametre(self, p):
+		return arbre_abstrait.Parametre(p[0], p[1])
+	
+	@_('parametre')
+	def listeParametres(self, p):
+		l = arbre_abstrait.ListeParametres()
+		l.parametres.append(p[0])
+		return l
+
+	@_('parametre listeParametres')
+	def listeParametres(self, p):
+		p[1].parametres.insert(0, p[0])
+		return p[1]
+	
+	@_('TYPE_ENTIER IDENTIFIANT "(" listeParametres ")" "{" listeInstructions "}"',
+    'TYPE_BOOLEEN IDENTIFIANT "(" listeParametres ")" "{" listeInstructions "}"')
+	def fonction(self, p):
+		return arbre_abstrait.DeclarationFonction(p[0], p[1], p[3], p[6])
+
+	@_('TYPE_ENTIER IDENTIFIANT "(" ")" "{" listeInstructions "}"',
+    'TYPE_BOOLEEN IDENTIFIANT "(" ")" "{" listeInstructions "}"')
+	def fonction(self, p):
+		return arbre_abstrait.DeclarationFonction(p[0], p[1], arbre_abstrait.ListeParametres(), p[6])
+
+	@_('IDENTIFIANT "(" expr ")"',
+    'IDENTIFIANT "(" superExpression ")" ')
+	def fact(self,p):
+		return arbre_abstrait.Fonction(p[0],p[2])
+
 	@_('VRAI')
-	def expr(self, p):
-		return arbre_abstrait.Vrai()
-	
+	def booleen(self,p):
+		return arbre_abstrait.Booleen(True)
+
 	@_('FAUX')
-	def expr(self, p):
-		return arbre_abstrait.Faux()
+	def booleen(self,p):
+		return arbre_abstrait.Booleen(False)
+    
+	@_("booleen")
+	def expr(self,p):
+		return p[0]
+		
+	@_("expr ET expr")
+	def expr(self,p):
+		return arbre_abstrait.LogOp("et",p[0],p[2])	
+	
+	@_("expr OU booleen")
+	def expr(self,p):
+		return arbre_abstrait.LogOp("ou",p[0],p[2])
+	
+	@_("NON booleen")
+	def expr(self,p):
+		return arbre_abstrait.NegLogOp(p[1])
 	
 	
-	@_('SI "(" expr ")" "{" listeInstructions "}"',
-       'SI "(" expr ")" "{" listeInstructions "}" SINON_SI',
-       'SI "(" expr ")" "{" listeInstructions "}" SINON "{" listeInstructions "}"',
-       'SI "(" expr ")" "{" listeInstructions "}" SINON_SI SINON "{" listeInstructions "}"'
-       )
+	@_('SI "(" expr ")" "{" listeInstructions "}" condSuite')
 	def instruction(self, p):
 		conditions = [p[2]]
 		instructions = [p[5]]
-		if len(p) == 8:
-			instructions.append(p[-1])
-		elif len(p) == 12:
-			instructions.append(p[-5])
-		if len(p) == 11 or len(p) == 12:
-			instructions.append(p[-2])
+
+		a,b = p[7]
+		conditions.extend(a)
+		instructions.extend(b)
 		return arbre_abstrait.Conditionnelle(conditions,instructions)
 	
-	"""@_('SINON_SI "(" expr ")" "{" listeInstructions "}"',
-	   )
-	def instruction(self, p):
-		if len(p) == 8:
-			return arbre_abstrait.Conditionnelle(p[2],p[5])
-		elif len(p) == 9:
-			return arbre_abstrait.Conditionnelle(p[2],[p[5], p[7]])
-	"""
 	
+	@_('SINON_SI "(" expr ")" "{" listeInstructions "}" condSuite')
+	def condSuite(self, p):
+		a,b = p[7]
+		return ([p[2]] + a, [p[5]] + b)
+	
+
+	@_('SINON "{" listeInstructions "}" ')
+	def condSuite(self, p):
+		return ([None], [p[2]])
+
+	@_('')
+	def condSuite(self, p):
+		return ([], [])
+	
+
 	@_('TANT_QUE "(" expr ")" "{" listeInstructions "}"')
+	def instruction(self,p):
+		return arbre_abstrait.TantQue(p[2], p[5])
+	
+	@_('RETOURNER expr ";"')
 	def instruction(self, p):
-		return arbre_abstrait.TantQue(p[2],p[5])
-
-
+		return arbre_abstrait.Retourner(p[1])
+	
 	@_('TYPE_ENTIER IDENTIFIANT ";"',
-    	'TYPE_BOOLEEN IDENTIFIANT ";"')
+    'TYPE_BOOLEEN IDENTIFIANT ";"')
 	def instruction(self, p):
 		return arbre_abstrait.Declaration(p[0], p[1])
 	
@@ -178,10 +246,13 @@ class FloParser(Parser):
 		return arbre_abstrait.Affectation(p[0], p[2])
 	
 	@_('TYPE_ENTIER IDENTIFIANT "=" expr ";"',
-    	'TYPE_BOOLEEN IDENTIFIANT "=" expr ";"')
+    'TYPE_BOOLEEN IDENTIFIANT "=" expr ";"')
 	def instruction(self, p):
 		return arbre_abstrait.DeclarationAffectation(p[0], p[1], p[3])
+	
+	
 
+	
 
 if __name__ == '__main__':
 	lexer = FloLexer()

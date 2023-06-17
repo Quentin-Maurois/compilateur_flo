@@ -1,7 +1,6 @@
 entier a;
-a = 5;
-a = 5 + 3;
+a = 10;
 
-entier b = 12;
+entier b = 11;
 
-entier c = (12 + 3 * 16);
+entier c=a+b;

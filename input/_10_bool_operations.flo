@@ -1,0 +1,14 @@
+ecrire(vrai);
+ecrire(faux);
+ecrire(non vrai);
+ecrire(non faux);
+
+ecrire(vrai et vrai);
+ecrire(vrai ou faux);
+
+ecrire(vrai ou vrai et faux);
+ecrire(vrai et faux ou vrai);
+ecrire(faux ou vrai et faux ou vrai);
+
+ecrire(vrai ou faux et non vrai ou faux);
+ecrire(vrai et non faux ou vrai et faux);
